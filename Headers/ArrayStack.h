@@ -2,7 +2,7 @@
 // Name: Abdullah Nazir
 // Date: March 09, 2024
 //
-// class Array
+// class ArrayStack
 // This file contains implementation of data structure 
 // stack implemented with array by inheriting from abstract
 // class Stack with extended features and functionalitites. 
