@@ -1,3 +1,13 @@
+// ********************************************************
+// Name: Abdullah Nazir
+// Date: March 27, 2024
+//
+// abstract class Stack
+// This file contains implementation of data structure 
+// stack abstract class. This class will be extended to 
+// ArrayStack and LinkedListStack.
+// ********************************************************
+
 #ifndef H_Stack
 #define H_Stack
 
