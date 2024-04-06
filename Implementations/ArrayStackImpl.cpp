@@ -14,15 +14,20 @@ template <class T>
 ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 {
 	top = -1;
-	Stack<T>::stackPtr = new T[Stack<T>::capacity];
+	stackPtr = new T[capacity];
 }
 
 template <class T>
 void ArrayStack<T>::display() const
 {
+	if (isEmpty())
+	{
+		std::cout << "Stack is empty.\n";
+		return;
+	}
 	std::cout << "Stack data: ";
-	for (int i = 0; i < Stack<T>::currentSize; i++)
-		std::cout << Stack<T>::stackPtr[i] << " ";
+	for (int i = 0; i < currentSize; i++)
+		std::cout << stackPtr[i] << " ";
 	std::cout << std::endl;
 }
 
@@ -31,8 +36,8 @@ void ArrayStack<T>::push(T value)
 {
 	if (isFull())
 		return;
-	Stack<T>::stackPtr[++top] = value;
-	Stack<T>::currentSize++;
+	stackPtr[++top] = value;
+	currentSize++;
 }
 
 template <class T>
@@ -40,9 +45,9 @@ T ArrayStack<T>::pop()
 {
 	if (isEmpty())
 		return T();
-	T temp = Stack<T>::stackPtr[top];
+	T temp = stackPtr[top];
 	top--;
-	Stack<T>::currentSize--;
+	currentSize--;
 	return temp;
 }
 
@@ -51,7 +56,17 @@ T ArrayStack<T>::peek() const
 {
 	if (isEmpty())
 		return T();
-	return Stack<T>::stackPtr[top];
+	return stackPtr[top];
+}
+
+template <class T>
+void ArrayStack<T>::clear()
+{
+	if (isEmpty())
+		return;
+
+	top = -1;
+	currentSize = 0;
 }
 
 template <class T>
@@ -63,12 +78,12 @@ bool ArrayStack<T>::isEmpty() const
 template <class T>
 bool ArrayStack<T>::isFull() const
 {
-	return (top == Stack<T>::capacity - 1);
+	return (top == capacity - 1);
 }
 
 template <class T>
 ArrayStack<T>::~ArrayStack()
 {
-	if (Stack<T>::stackPtr)
-		delete[] Stack<T>::stackPtr;
+	if (stackPtr)
+		delete[] stackPtr;
 }

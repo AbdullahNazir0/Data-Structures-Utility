@@ -3,9 +3,9 @@
 // Date: March 27, 2024
 //
 // class ArrayStack
-// This file contains implementation of data structure 
+// This file contains implementation of data structure
 // stack implemented with array by inheriting from abstract
-// class Stack with extended features and functionalitites. 
+// class Stack with extended features and functionalitites.
 // ********************************************************
 
 #ifndef H_ArrayStack
@@ -18,7 +18,7 @@ class ArrayStack : public Stack<T>
 {
 public:
 	ArrayStack(int = 100);
-	// Parameterized consturctor with default
+	// Parameterized constructor with default
 	//  argument capacity.
 	// The default capacity of the stack will
 	//  be 100, if no capacity is provided
@@ -39,6 +39,13 @@ public:
 	T peek() const override;
 	// Overriden function peek to return last value
 	//  of the stack pointed by the top.
+
+	T peekAt(int) const;
+	// Function to return value at a specific index
+	//  of the stack, given by the user.
+
+	void clear();
+	// Function to reset the stack.
 
 	bool isEmpty() const override;
 	// Overriden function isEmpty to check if the

@@ -3,8 +3,8 @@
 // Date: March 27, 2024
 //
 // abstract class Stack
-// This file contains implementation of data structure 
-// stack abstract class. This class will be extended to 
+// This file contains implementation of data structure
+// stack abstract class. This class will be extended to
 // ArrayStack and LinkedListStack.
 // ********************************************************
 
@@ -16,11 +16,9 @@ class Stack
 {
 public:
 	Stack(int);
-	// Parameterized constructor with default
-	//  argument capacity.
-	// The default capacity of the stack will
-	//  be 100, if no capacity is provided
-	//  explicitly.
+	// Parameterized consturctor.
+	// The function takes capacity as argument
+	//  and sets the capacity of stack.
 
 	virtual void display() const = 0;
 	// Pure virutal function to display all
@@ -28,7 +26,7 @@ public:
 	// It will be implemented in the concrete
 	//  class.
 
-	virtual void push(T value) = 0;
+	virtual void push(T) = 0;
 	// Pure virtual function to push a value
 	//  in the stack.
 	// It will be implemented in the concrete
