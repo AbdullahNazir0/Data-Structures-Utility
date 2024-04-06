@@ -1,5 +1,13 @@
-#include "../Headers/ArrayStack.h"
+// ********************************************************
+// Name: Abdullah Nazir
+// Date: March 27, 2024
+//
+// Implementation file ArrayStackImpl.cpp
+// This file contains definitions of the functions declared
+//  in the class ArrayStack .
+// ********************************************************
 
+#include "../Headers/ArrayStack.h"
 #include <iostream>
 
 template <class T>
