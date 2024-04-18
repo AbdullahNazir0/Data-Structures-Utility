@@ -3,8 +3,8 @@
 // Date: March 09, 2024
 //
 // class Array
-// This file contains implementation of data structure 
-// array with extended features and functionalitites. 
+// This file contains implementation of data structure
+// array with extended features and functionalitites.
 // ********************************************************
 
 #ifndef H_arrays
@@ -12,175 +12,170 @@
 
 #include <iostream>
 
-template<class T>
-class Array {
-	public:
-		Array();
-		// Default constructor to initialize the 
-		//  size to 0 and array to 1 and isSorted
-		//  to false.
+template <class T>
+class Array
+{
+public:
+	Array();
+	// Default constructor to initialize the
+	//  size to 0 and array to 1 and isSorted
+	//  to false.
 
-		Array(T value[], int arraySize);
-		// Parameterized constructor.
-		
-		Array(const Array<T> &other);
-		// Copy constructor to copy the contents.
+	Array(T value[], int arraySize);
+	// Parameterized constructor.
 
-		~Array();
-		// Destructor Function to delete the arr.
+	Array(const Array<T> &other);
+	// Copy constructor to copy the contents.
 
-		int length() const;
-		// Function to get length of the array.
-		// It will return the size of the array.
+	~Array();
+	// Destructor Function to delete the arr.
 
-		void displayFormatted() const;
-		// Function to display the contents of 
-		//  array in a more appealing format i.e.
-		//  [
-		//    t1,
-		//    t2,
-		//    t3
-		//  ]
-		
-		bool isEmpty() const;
-		// Function to check if the array is empty.
+	int length() const;
+	// Function to get length of the array.
+	// It will return the size of the array.
 
-		bool isFull() const;
-		// Function to check if the array is full.
+	void displayFormatted() const;
+	// Function to display the contents of
+	//  array in a more appealing format i.e.
+	//  [
+	//    t1,
+	//    t2,
+	//    t3
+	//  ]
 
-		bool isPresent(T value) const;
-		// Function to check if an element is 
-		//  present in the array.
-		
-		void operator= (const Array<T> &other);
-		// Function to implement assignment (=)
-		//  operator for the array.
-		// The assignment will be deep copy.
+	bool isEmpty() const;
+	// Function to check if the array is empty.
 
-		bool operator== (const Array<T> &other) const;
-		// Function to implement equal to operator 
-		//  (==) to check if two arrays are equal 
-		//  or not.
-		// Equal arrays will have same size and 
-		//  same elements.
+	bool isFull() const;
+	// Function to check if the array is full.
 
-		T operator[] (int index) const;
-		// Function to implement square brackets
-		//  ([]) for the array to access a specific
-		//  element of the array.
+	bool isPresent(T value) const;
+	// Function to check if an element is
+	//  present in the array.
 
-		void sortInAscending();
-		// Function to sort the array in ascending 
-		//  order.
+	void operator=(const Array<T> &other);
+	// Function to implement assignment (=)
+	//  operator for the array.
+	// The assignment will be deep copy.
 
-		void sortInDescending();
-		// Function to sort the array in descending
-		//  order.
+	bool operator==(const Array<T> &other) const;
+	// Function to implement equal to operator
+	//  (==) to check if two arrays are equal
+	//  or not.
+	// Equal arrays will have same size and
+	//  same elements.
 
-		void fillWith(T value, int index);
-		// This function will fill the array with
-		//  the given value for all elements from 
-		//  start to the given index.
-		// It will regrow or shrink the array as 
-		//  needed.
+	T operator[](int index) const;
+	// Function to implement square brackets
+	//  ([]) for the array to access a specific
+	//  element of the array.
 
-		void swapWith(T value, int index);
-		// Function to swap the value at a given 
-		//  index with the given new value.
+	void sortInAscending();
+	// Function to sort the array in ascending
+	//  order.
 
-		void swapAll(T newValue, T oldValue);
-		// Function to swap all occurances of a 
-		//  value with a new given value.
+	void sortInDescending();
+	// Function to sort the array in descending
+	//  order.
 
-		T* slice(int startIndex, int endIndex) const;
-		// Function to return a subarray of the 
-		//  array from given starting and ending
-		//  point.
-		// The returned array will be built-in
-		//  array.
+	void fillWith(T value, int index);
+	// This function will fill the array with
+	//  the given value for all elements from
+	//  start to the given index.
+	// It will regrow or shrink the array as
+	//  needed.
 
-		void join(const Array<T> &other);
-		// Function to join the array with given 
-		//  new array.
-		// The new array will be added to the end.
+	void swapWith(T value, int index);
+	// Function to swap the value at a given
+	//  index with the given new value.
 
-		int searchByValue(T value) const;
-		// Function to search given value in array.
-		// If Present it will return the index.
-		// If not, it will return -1 with 
-		//  displaying not found.
+	void swapAll(T newValue, T oldValue);
+	// Function to swap all occurances of a
+	//  value with a new given value.
 
-		void insertAtStart(T element);
-		// Function to insert element at the start
-		//  of the array.
+	T *slice(int startIndex, int endIndex) const;
+	// Function to return a subarray of the
+	//  array from given starting and ending
+	//  point.
+	// The returned array will be built-in
+	//  array.
 
-		void insertAtIndex(T element, int index);
-		// Function to insert element at an index
-		//  given by the user.
+	void join(const Array<T> &other);
+	// Function to join the array with given
+	//  new array.
+	// The new array will be added to the end.
 
-		void insertAtEnd(T element);
-		// Function to insert element at the end of
-		//  the array.
+	int searchByValue(T value) const;
+	// Function to search given value in array.
+	// If Present it will return the index.
+	// If not, it will return -1 with
+	//  displaying not found.
 
-		T deleteFirst();
-		// Function to delete first element of the 
-		//  array.
+	void insertAtStart(T element);
+	// Function to insert element at the start
+	//  of the array.
 
-		T deleteLast();
-		// Function to delete last element of the 
-		//  array.
+	void insertAtIndex(T element, int index);
+	// Function to insert element at an index
+	//  given by the user.
 
-		T deleteAtIndex(int index);
-		// Function to delete element of the array 
-		//  at index given by the user.
-		// If not present, it will print index
-		//  not found.
-		
-		void deleteByValue(T value);
-		// Function to delete the user given value 
-		//  in the array.
-		// If not present, it will print value
-		//  not found.
+	void insertAtEnd(T element);
+	// Function to insert element at the end of
+	//  the array.
 
-		static Array<T> toArray(T other[], int arraySize);
-		// Function to convert a built-in array to 
-		//  this Array data structure.
+	T deleteFirst();
+	// Function to delete first element of the
+	//  array.
 
-	private:
-		
-		friend std::ostream& operator<< (
-			std::ostream &out, 
-			const Array<T> &arr
-		);
-		// Function to overload insertion 
-		//  operators to display the array in 
-		//  default format i.e. 
-		//  [t1, t2, t3]
+	T deleteLast();
+	// Function to delete last element of the
+	//  array.
 
-		friend std::istream& operator>> (
-					std::istream &in, 
-					Array<T> &arr
-				);
-		// Function to overload extraction operators
-		//  to take input from user.
-	
-		T *arr;
-		int size;
-		bool isSorted;
+	T deleteAtIndex(int index);
+	// Function to delete element of the array
+	//  at index given by the user.
+	// If not present, it will print index
+	//  not found.
 
+	void deleteByValue(T value);
+	// Function to delete the user given value
+	//  in the array.
+	// If not present, it will print value
+	//  not found.
+
+	static Array<T> toArray(T other[], int arraySize);
+	// Function to convert a built-in array to
+	//  this Array data structure.
+
+private:
+	friend std::ostream &operator<<(
+		std::ostream &out,
+		const Array<T> &arr);
+	// Function to overload insertion
+	//  operators to display the array in
+	//  default format i.e.
+	//  [t1, t2, t3]
+
+	friend std::istream &operator>>(
+		std::istream &in,
+		Array<T> &arr);
+	// Function to overload extraction operators
+	//  to take input from user.
+
+	T *arr;
+	int size;
+	bool isSorted;
 };
 
-template<class T>
-std::istream& operator>> (
-		std::istream& in, 
-		Array<T> &arr
-		);
+template <class T>
+std::istream &operator>>(
+	std::istream &in,
+	Array<T> &arr);
 
-template<class T>
-std::ostream& operator<< (
-		std::ostream& out, 
-		const Array<T> &arr
-		);
+template <class T>
+std::ostream &operator<<(
+	std::ostream &out,
+	const Array<T> &arr);
 
 #include "../Implementations/ArraysImpl.cpp"
 

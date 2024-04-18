@@ -11,13 +11,15 @@
 #ifndef H_ArrayStack
 #define H_ArrayStack
 
+#define DEFAULT_MAX_SIZE 100;
+
 #include "Stack.h"
 
 template <class T>
 class ArrayStack : public Stack<T>
 {
 public:
-	ArrayStack(int = 100);
+	ArrayStack(int = DEFAULT_MAX_SIZE);
 	// Parameterized constructor with default
 	//  argument capacity.
 	// The default capacity of the stack will
@@ -56,6 +58,12 @@ public:
 	// Overriden function isFull to check if the
 	//  stack is full or not.
 	// True is empty, false otherwise.
+
+	ArrayStack<T> from(T *);
+	// Function to return an ArrayStack from the
+	//  given array.
+	// This function takes an array as parameter
+	//  and return a stack with this array.
 
 	~ArrayStack();
 	// Destructor function to delete dynamic memory.
