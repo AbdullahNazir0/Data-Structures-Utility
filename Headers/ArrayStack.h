@@ -59,7 +59,7 @@ public:
 	//  stack is full or not.
 	// True is empty, false otherwise.
 
-	ArrayStack<T> from(T *);
+	static ArrayStack<T> from(T *);
 	// Function to return an ArrayStack from the
 	//  given array.
 	// This function takes an array as parameter
