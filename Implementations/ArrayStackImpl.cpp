@@ -14,8 +14,39 @@ template <class T>
 ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 {
 	top = -1;
+	this->currentSize = 0;
 	this->stackPtr = new T[this->capacity];
 }
+
+// template <class T>
+// ArrayStack<T>::ArrayStack(const ArrayStack &obj)
+// {
+// 	this->capacity = obj.capacity;
+// 	top = obj.top;
+// 	this->currentSize = obj.currentSize;
+// 	if (obj.stackPtr)
+// 	{
+// 		this->stackPtr = new T[this->capacity];
+// 		for (int i = 0; i < this->currentSize; i++)
+// 			this->stackPtr[i] = obj.stackPtr[i];
+// 	}
+// 	else
+// 		this->stackPtr = nullptr;
+// }
+
+// template <class T>
+// ArrayStack<T>::ArrayStack(ArrayStack &&other) noexcept
+// {
+// 	this->capacity = other.capacity;
+// 	this->currentSize = other.currentSize;
+// 	top = other.top;
+// 	this->stackPtr = other.stackPtr;
+
+// 	other.stackPtr = nullptr;
+// 	other.top = -1;
+// 	other.capacity = 0;
+// 	other.currentSize = 0;
+// }
 
 template <class T>
 void ArrayStack<T>::display() const
@@ -82,19 +113,17 @@ bool ArrayStack<T>::isFull() const
 }
 
 template <class T>
-ArrayStack<T> ArrayStack<T>::from(T *arr)
+ArrayStack<T> ArrayStack<T>::from(T *arr, int size)
 {
-	int arrSize = sizeof(arr) / sizeof(arr[0]);
-	if (arrSize == 0)
+	if (size <= 0 || !arr)
 		return ArrayStack();
 	int maxSize = DEFAULT_MAX_SIZE;
-	if (arrSize > DEFAULT_MAX_SIZE)
-		maxSize = arrSize;
-	ArrayStack tempStack = ArrayStack(maxSize);
-	for (int i = 0; i < arrSize; i++)
-	{
+	if (size > DEFAULT_MAX_SIZE)
+		maxSize = size;
+	ArrayStack tempStack(maxSize);
+	for (int i = 0; i < size; ++i)
 		tempStack.push(arr[i]);
-	}
+
 	return tempStack;
 }
 

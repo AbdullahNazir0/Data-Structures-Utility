@@ -11,7 +11,7 @@
 #ifndef H_ArrayStack
 #define H_ArrayStack
 
-#define DEFAULT_MAX_SIZE 100;
+#define DEFAULT_MAX_SIZE 100
 
 #include "Stack.h"
 
@@ -25,6 +25,19 @@ public:
 	// The default capacity of the stack will
 	//  be 100, if no capacity is provided
 	//  explicitly.
+
+	// ArrayStack(const ArrayStack &other);
+	// // Copy constructor with ArrayStack object as
+	// //  argument.
+	// // It will deep copy all the contents of the
+	// //  object.
+
+	// ArrayStack(ArrayStack &&other) noexcept;
+	// // Move constructor with ArrayStack object as
+	// //  argument.
+	// // It will move all the contents of object
+	// //  passed to this object, and set the
+	// //  passed object to empty stack.
 
 	void display() const override;
 	// Overriden function display to display
@@ -59,7 +72,7 @@ public:
 	//  stack is full or not.
 	// True is empty, false otherwise.
 
-	static ArrayStack<T> from(T *);
+	static ArrayStack<T> from(T *, int);
 	// Function to return an ArrayStack from the
 	//  given array.
 	// This function takes an array as parameter
