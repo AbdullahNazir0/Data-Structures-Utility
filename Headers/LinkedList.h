@@ -31,63 +31,57 @@ public:
     //  the linked list with formatting.
     // It will be implemented in the concrete class.
 
-    virtual void displayReversed() const = 0;
-    // Pure virtual function to display the contents of
-    //  the linked list in reverse order.
-    // It will be implemented in the concrete class.
-
     virtual void displayAtIndex(int) = 0;
     // Pure virtual function to display the element at a
     //  specific index in the linked list.
     // It will be implemented in the concrete class.
 
-    // Insertions
-    virtual void insertAtStart(T) = 0;
+    virtual void insertAtStart(const T &) = 0;
     // Pure virtual function to insert a value at the
     //  beginning of the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAtStart(Node *) = 0;
+    virtual void insertAtStart(Node<T> *) = 0;
     // Pure virtual function to insert a node at the
     //  beginning of the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAtEnd(T) = 0;
+    virtual void insertAtEnd(const T &) = 0;
     // Pure virtual function to insert a value at the
     //  end of the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAtEnd(Node *) = 0;
+    virtual void insertAtEnd(Node<T> *) = 0;
     // Pure virtual function to insert a node at the
     //  end of the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAtIndex(T, int) = 0;
+    virtual void insertAtIndex(const T &, int) = 0;
     // Pure virtual function to insert a value at a
     //  specific index in the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAtIndex(Node *, int) = 0;
+    virtual void insertAtIndex(Node<T> *, int) = 0;
     // Pure virtual function to insert a node at a
     //  specific index in the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertBeforeNode(T, Node *) = 0;
+    virtual void insertBeforeNode(const T &, Node<T> *) = 0;
     // Pure virtual function to insert a value before
     //  a specific node in the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertBeforeNode(Node *, Node *) = 0;
+    virtual void insertBeforeNode(Node<T> *, Node<T> *) = 0;
     // Pure virtual function to insert a node before a
     //  specific node in the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAfterNode(T, Node *) = 0;
+    virtual void insertAfterNode(const T &, Node<T> *) = 0;
     // Pure virtual function to insert a value after a
     //  specific node in the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertAfterNode(Node *, Node *) = 0;
+    virtual void insertAfterNode(Node<T> *, Node<T> *) = 0;
     // Pure virtual function to insert a node after a
     //  specific node in the linked list.
     // It will be implemented in the concrete class.
@@ -97,7 +91,7 @@ public:
     //  into the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void insertMultiple(Node *, int) = 0;
+    virtual void insertMultiple(Node<T> *, int) = 0;
     // Pure virtual function to insert multiple nodes
     //  into the linked list.
     // It will be implemented in the concrete class.
@@ -117,22 +111,22 @@ public:
     //  specific index from the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void deleteByValue(T) = 0;
+    virtual void deleteByValue(const T &) = 0;
     // Pure virtual function to delete the first node
     //  with a specific value from the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void deleteAllByValue(T) = 0;
+    virtual void deleteAllByValue(const T &) = 0;
     // Pure virtual function to delete all nodes with a
     //  specific value from the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void deleteBeforeNode(Node *) = 0;
+    virtual void deleteBeforeNode(Node<T> *) = 0;
     // Pure virtual function to delete the node before a
     //  specific node from the linked list.
     // It will be implemented in the concrete class.
 
-    virtual void deleteAfterNode(Node *) = 0;
+    virtual void deleteAfterNode(Node<T> *) = 0;
     // Pure virtual function to delete the node after a
     //  specific node from the linked list.
     // It will be implemented in the concrete class.
@@ -156,7 +150,8 @@ public:
     // Destructor Function for LinkedList.
 
 protected:
-    Node *head;
+    Node<T> *head;
+    int nodesCount;
 };
 
 #include "../Implementations/LinkedListImpl.cpp"

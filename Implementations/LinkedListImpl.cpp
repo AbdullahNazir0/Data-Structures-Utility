@@ -12,12 +12,13 @@
 template <class T>
 LinkedList<T>::LinkedList()
 {
-    head = nullptr;
+    this->head = nullptr;
+    this->nodesCount = 0;
 }
 
 template <class T>
 LinkedList<T>::~LinkedList()
 {
-    if (head)
-        delete head;
+    if (this->head)
+        delete this->head;
 }
