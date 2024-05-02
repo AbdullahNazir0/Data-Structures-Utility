@@ -20,7 +20,10 @@ class SinglyLinkedList : public LinkedList<T>
 public:
     SinglyLinkedList();
     // Default constructor for SinglyLinkedList.
-    // Initializes the head pointer to nullptr.
+    // Initializes the tail pointer to nullptr
+    //  and head will also be initialized to
+    //  nullptr when LinkedList constructor will
+    //  be called.
 
     void display() const override;
     // Function to display all contents of the singly
@@ -107,7 +110,7 @@ public:
 
     void insertMultiple(Node<T> *, int) override;
     // Function to insert multiple nodes into the
-    //  singly linked list.
+    //  singly linked list (start).
     // Overrides the insertMultiple method of the
     //  base class.
 

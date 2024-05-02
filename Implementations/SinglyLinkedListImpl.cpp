@@ -109,6 +109,11 @@ void SinglyLinkedList<T>::insertAtStart(const T &value)
 template <class T>
 void SinglyLinkedList<T>::insertAtEnd(Node<T> *node)
 {
+    if (!node)
+    {
+        std::cout << "Cannot insert an empty node.\n";
+        return;
+    }
     if (!this->head)
     {
         this->head = node;
@@ -171,6 +176,10 @@ void SinglyLinkedList<T>::insertBeforeNode(
     {
         std::cout << "Linked List is empty. (Not inserted)\n";
         return;
+    }
+    if (!nodeToCheck)
+    {
+        std::cout << "Cannot add before an empty node.\n" return;
     }
 
     Node<T> *temp = this->head;
@@ -270,6 +279,8 @@ void SinglyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
         temp->next = this->head;
         this->head = valuesList;
         this->nodesCount += count;
+
+        valuesList = nullptr; // releasing ownership.
     }
 }
 

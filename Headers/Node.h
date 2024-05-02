@@ -22,6 +22,11 @@ struct Node
         data = value;
         next = nullptr;
     }
+    virtual Node<T> *getPrev() const
+    {
+        return nullptr; // Default implementation for regular nodes
+    }
+    virtual void setPrev(Node<T> *value) {}
 };
 
 #endif // H_Node
