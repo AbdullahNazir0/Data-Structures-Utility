@@ -11,13 +11,13 @@
 #include "./Headers/Arrays.h"
 #include <iterator>
 
-template<class T>
+template<typename T>
 Array<T>::Array() : size(1), isSorted(false)
 {
 	arr = new T[1];
 }
 
-template<class T>
+template<typename T>
 Array<T>::Array(T value[], int arraySize) : size(arraySize), isSorted(false)
 {
 	arr = new T[size];
@@ -26,7 +26,7 @@ Array<T>::Array(T value[], int arraySize) : size(arraySize), isSorted(false)
 	
 }
 
-template<class T>
+template<typename T>
 Array<T>::Array(const Array<T> &other) : size(other.size), isSorted(other.isSorted)
 {
 	arr = new T[size];
@@ -34,19 +34,19 @@ Array<T>::Array(const Array<T> &other) : size(other.size), isSorted(other.isSort
 		arr[i] = other.arr[i];
 }
 
-template<class T>
+template<typename T>
 Array<T>::~Array()
 {
 	delete[]arr;
 }
 
-template<class T>
+template<typename T>
 int Array<T>::length() const
 {
 	return size;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::displayFormatted() const
 {
 	std::cout << "[\n";
@@ -55,13 +55,13 @@ void Array<T>::displayFormatted() const
 	std::cout << "]\n";
 }
 
-template<class T>
+template<typename T>
 bool Array<T>::isEmpty() const
 {
 	return(size == 0);
 }
 
-template<class T>
+template<typename T>
 bool Array<T>::isPresent(T value) const
 {
 	if(size == 0)
@@ -74,7 +74,7 @@ bool Array<T>::isPresent(T value) const
 	return false;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::operator= (const Array<T> &other)
 {
 	size = other.size;
@@ -88,7 +88,7 @@ void Array<T>::operator= (const Array<T> &other)
 	}
 }
 
-template<class T>
+template<typename T>
 bool Array<T>::operator== (const Array<T> &other) const
 {
 	if(size != other.size)
@@ -104,7 +104,7 @@ bool Array<T>::operator== (const Array<T> &other) const
 	}
 }
 
-template<class T>
+template<typename T>
 T Array<T>::operator[] (int index) const
 {
 	if(index < 0)
@@ -121,7 +121,7 @@ T Array<T>::operator[] (int index) const
 	return arr[index];
 }
 
-template<class T>
+template<typename T>
 void Array<T>::sortInAscending()
 {
 	if(size == 0)
@@ -156,7 +156,7 @@ void Array<T>::sortInAscending()
 	isSorted = true;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::sortInDescending()
 {
 	if(size == 0)
@@ -191,7 +191,7 @@ void Array<T>::sortInDescending()
 	isSorted = true;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::fillWith(T value, int index)
 {
 	if(index < 0)
@@ -219,7 +219,7 @@ void Array<T>::fillWith(T value, int index)
 
 }
 
-template<class T>
+template<typename T>
 void Array<T>::swapWith(T value, int index)
 {
 	if(index < 0)
@@ -239,7 +239,7 @@ void Array<T>::swapWith(T value, int index)
 
 }
 
-template<class T>
+template<typename T>
 void Array<T>::swapAll(T oldValue, T newValue)
 {
 	for(int i = 0; i < size; i++)
@@ -249,7 +249,7 @@ void Array<T>::swapAll(T oldValue, T newValue)
 	}
 }
 
-template<class T>
+template<typename T>
 T* Array<T>::slice(int startIndex, int endIndex) const
 {
 	if(startIndex < 0 || startIndex > size - 1)
@@ -278,7 +278,7 @@ T* Array<T>::slice(int startIndex, int endIndex) const
 	return temp;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::join(const Array<T> &other)
 {
 	if(other.size == 0)
@@ -297,7 +297,7 @@ void Array<T>::join(const Array<T> &other)
 		isSorted = false;
 }
 
-template<class T>
+template<typename T>
 int Array<T>::searchByValue(T value) const
 {
 	for(int i = 0; i < size; i++)
@@ -308,7 +308,7 @@ int Array<T>::searchByValue(T value) const
 	return T();
 }
 
-template <class T>
+template <typename T>
 void Array<T>::insertAtStart(T element)
 {
 	T* temp = new T[size + 1];
@@ -322,7 +322,7 @@ void Array<T>::insertAtStart(T element)
 		isSorted = false;
 }
 
-template<class T>
+template<typename T>
 void Array<T>::insertAtIndex(T element, int index)
 {
 	if(index < 0)
@@ -353,7 +353,7 @@ void Array<T>::insertAtIndex(T element, int index)
 	}
 }
 
-template<class T>
+template<typename T>
 void Array<T>::insertAtEnd(T element)
 {
 	T* temp = new T[size + 1];
@@ -367,7 +367,7 @@ void Array<T>::insertAtEnd(T element)
 		isSorted = false;
 }
 
-template<class T>
+template<typename T>
 T Array<T>::deleteFirst()
 {
 	if(size == 0)
@@ -384,7 +384,7 @@ T Array<T>::deleteFirst()
 	return(temp);
 }
 
-template<class T>
+template<typename T>
 T Array<T>::deleteLast()
 {
 	if(size == 0)
@@ -398,7 +398,7 @@ T Array<T>::deleteLast()
 	return(arr[size]);
 }
 
-template<class T>
+template<typename T>
 T Array<T>::deleteAtIndex(int index)
 {
 	if(size == 0)
@@ -425,7 +425,7 @@ T Array<T>::deleteAtIndex(int index)
 	return(temp);
 }
 
-template<class T>
+template<typename T>
 void Array<T>::deleteByValue(T value)
 {
 	if(size == 0)
@@ -448,14 +448,14 @@ void Array<T>::deleteByValue(T value)
 
 }
 
-template<class T>
+template<typename T>
 Array<T> Array<T>::toArray(T other[], int arraySize)
 {
 	Array<T> temp(other, arraySize);
 	return temp;
 }
 
-template<class T>
+template<typename T>
 std::istream& operator>> (
 		std::istream& in,
 		Array<T> &arr
@@ -466,7 +466,7 @@ std::istream& operator>> (
 	return in;
 }
 
-template<class T>
+template<typename T>
 std::ostream& operator<< (
 		std::ostream &out,
 		const Array<T> &arr

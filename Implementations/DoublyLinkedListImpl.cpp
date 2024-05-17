@@ -10,7 +10,7 @@
 #include "../Headers/DoublyLinkedList.h"
 #include <iostream>
 
-template <class T>
+template <typename T>
 Node<T> *DoublyLinkedList<T>::findNode(const T &value)
 {
     Node<T> *temp = this->head;
@@ -25,13 +25,13 @@ Node<T> *DoublyLinkedList<T>::findNode(const T &value)
     return nullptr; // Node with the specified value not found
 }
 
-template <class T>
+template <typename T>
 DoublyLinkedList<T>::DoublyLinkedList()
 {
     this->tail = nullptr;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::display() const
 {
     if (!this->head)
@@ -50,7 +50,7 @@ void DoublyLinkedList<T>::display() const
     std::cout << temp->data << "\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::displayReversed() const
 {
     if (!this->head)
@@ -69,7 +69,7 @@ void DoublyLinkedList<T>::displayReversed() const
     std::cout << temp->data << "\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::displayFormatted() const
 {
     if (!this->head)
@@ -88,7 +88,7 @@ void DoublyLinkedList<T>::displayFormatted() const
     std::cout << temp->data << " ]\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::displayFormattedAndReversed() const
 {
     if (!this->head)
@@ -107,7 +107,7 @@ void DoublyLinkedList<T>::displayFormattedAndReversed() const
     std::cout << temp->data << " ]\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::displayAtIndex(int index)
 {
     if (index < 0 || index >= this->nodesCount)
@@ -149,7 +149,7 @@ void DoublyLinkedList<T>::displayAtIndex(int index)
     }
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtStart(Node<T> *node)
 {
     if (!node)
@@ -171,14 +171,14 @@ void DoublyLinkedList<T>::insertAtStart(Node<T> *node)
     this->nodesCount++;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtStart(const T &value)
 {
     Node<T> *temp = new DoublyNode<T>(value);
     insertAtStart(temp);
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtEnd(Node<T> *node)
 {
     if (!node)
@@ -200,14 +200,14 @@ void DoublyLinkedList<T>::insertAtEnd(Node<T> *node)
     this->nodesCount++;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtEnd(const T &value)
 {
     Node<T> *temp = new DoublyNode<T>(value);
     insertAtEnd(temp);
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtIndex(Node<T> *value, int index)
 {
     if (index < 0 || index > this->nodesCount)
@@ -247,7 +247,7 @@ void DoublyLinkedList<T>::insertAtIndex(Node<T> *value, int index)
     }
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAtIndex(const T &value, int index)
 {
 
@@ -255,7 +255,7 @@ void DoublyLinkedList<T>::insertAtIndex(const T &value, int index)
     insertAtIndex(valueNode, index);
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertBeforeNode(
     Node<T> *value,
     Node<T> *nodeToCheck)
@@ -298,7 +298,7 @@ void DoublyLinkedList<T>::insertBeforeNode(
     std::cout << "Node not found in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertBeforeNode(
     const T &value,
     Node<T> *nodeToCheck)
@@ -307,7 +307,7 @@ void DoublyLinkedList<T>::insertBeforeNode(
     insertBeforeNode(valueNode, nodeToCheck);
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAfterNode(
     Node<T> *value,
     Node<T> *nodeToCheck)
@@ -350,7 +350,7 @@ void DoublyLinkedList<T>::insertAfterNode(
     std::cout << "Node not found in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertAfterNode(
     const T &value,
     Node<T> *nodeToCheck)
@@ -359,7 +359,7 @@ void DoublyLinkedList<T>::insertAfterNode(
     insertAfterNode(valueNode, nodeToCheck);
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
 {
     // Assuming that the valuesList is also a linked list.
@@ -391,7 +391,7 @@ void DoublyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
     }
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::insertMultiple(T *values, int count)
 {
     if (!values || count <= 0)
@@ -432,7 +432,7 @@ void DoublyLinkedList<T>::insertMultiple(T *values, int count)
 
 // - > continue from here
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteFirst()
 {
     if (!this->head)
@@ -449,7 +449,7 @@ void DoublyLinkedList<T>::deleteFirst()
     this->nodesCount--;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteLast()
 {
     if (!this->head)
@@ -478,7 +478,7 @@ void DoublyLinkedList<T>::deleteLast()
     this->tail = temp;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteFromIndex(int index)
 {
     if (!this->head)
@@ -518,7 +518,7 @@ void DoublyLinkedList<T>::deleteFromIndex(int index)
     this->nodesCount--;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteByValue(const T &value)
 {
     if (!this->head)
@@ -548,7 +548,7 @@ void DoublyLinkedList<T>::deleteByValue(const T &value)
     std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
-// template <class T>
+// template <typename T>
 // void DoublyLinkedList<T>::deleteAllByValue(const T &value)
 // {
 //     if (!this->head)
@@ -594,7 +594,7 @@ void DoublyLinkedList<T>::deleteByValue(const T &value)
 //         std::cout << "Cannot find " << value << " in Linked List.\n";
 // }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteAllByValue(const T &value)
 {
     if (!this->head)
@@ -628,7 +628,7 @@ void DoublyLinkedList<T>::deleteAllByValue(const T &value)
         std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
 {
     if (!this->head || !this->head->next)
@@ -667,7 +667,7 @@ void DoublyLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
     std::cout << "Node not found.\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
 {
     if (!this->head)
@@ -700,7 +700,7 @@ void DoublyLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
     std::cout << "Node not found.\n";
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::clear()
 {
     if (!this->head)
@@ -715,7 +715,7 @@ void DoublyLinkedList<T>::clear()
     }
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteList()
 {
     if (!this->head)
@@ -736,7 +736,7 @@ void DoublyLinkedList<T>::deleteList()
     this->nodesCount = 0;
 }
 
-template <class T>
+template <typename T>
 void DoublyLinkedList<T>::deleteRange(int startIndex, int endIndex)
 {
     if (!this->head)
@@ -776,7 +776,7 @@ void DoublyLinkedList<T>::deleteRange(int startIndex, int endIndex)
         this->tail = prev;
 }
 
-template <class T>
+template <typename T>
 DoublyLinkedList<T>::~DoublyLinkedList()
 {
     Node<T> *current = this->head;

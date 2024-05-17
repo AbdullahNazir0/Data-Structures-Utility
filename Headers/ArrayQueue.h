@@ -13,7 +13,7 @@
 
 #include "Queue.h"
 
-template <class T>
+template <typename T>
 class ArrayQueue : public Queue<T>
 {
     ArrayQueue(int = 100);

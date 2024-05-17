@@ -11,7 +11,7 @@
 #ifndef H_Queue
 #define H_Queue
 
-template <class T>
+template <typename T>
 class Queue
 {
 public:

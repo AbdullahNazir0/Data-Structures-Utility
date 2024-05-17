@@ -14,7 +14,7 @@
 // #include "Node.h"
 #include "LinkedList.h"
 
-template <class T>
+template <typename T>
 class SinglyLinkedList : public LinkedList<T>
 {
 public:

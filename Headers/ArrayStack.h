@@ -15,7 +15,7 @@
 
 #include "Stack.h"
 
-template <class T>
+template <typename T>
 class ArrayStack : public Stack<T>
 {
 public:

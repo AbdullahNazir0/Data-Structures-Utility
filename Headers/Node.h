@@ -11,7 +11,7 @@
 #ifndef H_Node
 #define H_Node
 
-template <class T>
+template <typename T>
 struct Node
 {
     T data;

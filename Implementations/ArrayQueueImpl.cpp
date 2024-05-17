@@ -9,7 +9,7 @@
 
 #include "ArrayQueue.h"
 
-template <class T>
+template <typename T>
 ArrayQueue<T>::ArrayQueue(int cap = 100) : Queue<T>(cap)
 {
     front = -1;
@@ -18,7 +18,7 @@ ArrayQueue<T>::ArrayQueue(int cap = 100) : Queue<T>(cap)
     stackPtr = new T[capacity];
 }
 
-template <class T>
+template <typename T>
 void ArrayQueue<T>::display() const
 {
     if (isEmpty())
@@ -32,7 +32,7 @@ void ArrayQueue<T>::display() const
     std::cout << "\n";
 }
 
-template <class T>
+template <typename T>
 void ArrayQueue<T>::enqueue(T value)
 {
     if (isFull())
@@ -44,7 +44,7 @@ void ArrayQueue<T>::enqueue(T value)
         front++;
 }
 
-template <class T>
+template <typename T>
 T ArrayQueue<T>::dequeue()
 {
     if (isEmpty)
@@ -66,7 +66,7 @@ T ArrayQueue<T>::dequeue()
     }
 }
 
-template <class T>
+template <typename T>
 T ArrayQueue<T>::peek() const
 {
     if (isEmpty())
@@ -75,7 +75,7 @@ T ArrayQueue<T>::peek() const
     return queuePtr[front];
 }
 
-template <class T>
+template <typename T>
 T ArrayQueue<T>::peekAt(int position) const
 {
     if (isEmpty() || position > currentSize || position < 0)
@@ -84,7 +84,7 @@ T ArrayQueue<T>::peekAt(int position) const
     return queuePtr[position];
 }
 
-template <class T>
+template <typename T>
 T ArrayQueue<T>::atLast() const
 {
     if (isEmpty)
@@ -93,7 +93,7 @@ T ArrayQueue<T>::atLast() const
     return queuePtr[rear];
 }
 
-template <class T>
+template <typename T>
 void ArrayQueue<T>::clear()
 {
     if (isEmpty())
@@ -104,19 +104,19 @@ void ArrayQueue<T>::clear()
     currentSize = 0;
 }
 
-template <class T>
+template <typename T>
 bool ArrayQueue<T>::isEmpty() const
 {
     return (currentSize == 0);
 }
 
-template <class T>
+template <typename T>
 bool ArrayQueue<T>::isFull() const
 {
     return (currentSize == capacity);
 }
 
-template <class T>
+template <typename T>
 ArrayQueue<T>::~ArrayQueue()
 {
     if (queuePtr)

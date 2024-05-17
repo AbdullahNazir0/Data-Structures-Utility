@@ -14,7 +14,7 @@
 #include "LinkedList.h"
 #include "DoublyNode.h"
 
-template <class T>
+template <typename T>
 class DoublyLinkedList : LinkedList<T>
 {
 public:

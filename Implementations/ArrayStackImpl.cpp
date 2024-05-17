@@ -10,7 +10,7 @@
 #include "../Headers/ArrayStack.h"
 #include <iostream>
 
-template <class T>
+template <typename T>
 ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 {
 	top = -1;
@@ -18,7 +18,7 @@ ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 	this->stackPtr = new T[this->capacity];
 }
 
-// template <class T>
+// template <typename T>
 // ArrayStack<T>::ArrayStack(const ArrayStack &obj)
 // {
 // 	this->capacity = obj.capacity;
@@ -34,7 +34,7 @@ ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 // 		this->stackPtr = nullptr;
 // }
 
-// template <class T>
+// template <typename T>
 // ArrayStack<T>::ArrayStack(ArrayStack &&other) noexcept
 // {
 // 	this->capacity = other.capacity;
@@ -48,7 +48,7 @@ ArrayStack<T>::ArrayStack(int cap) : Stack<T>(cap)
 // 	other.currentSize = 0;
 // }
 
-template <class T>
+template <typename T>
 void ArrayStack<T>::display() const
 {
 	if (isEmpty())
@@ -62,7 +62,7 @@ void ArrayStack<T>::display() const
 	std::cout << std::endl;
 }
 
-template <class T>
+template <typename T>
 void ArrayStack<T>::push(T value)
 {
 	if (isFull())
@@ -71,7 +71,7 @@ void ArrayStack<T>::push(T value)
 	this->currentSize++;
 }
 
-template <class T>
+template <typename T>
 T ArrayStack<T>::pop()
 {
 	if (isEmpty())
@@ -82,7 +82,7 @@ T ArrayStack<T>::pop()
 	return temp;
 }
 
-template <class T>
+template <typename T>
 T ArrayStack<T>::peek() const
 {
 	if (isEmpty())
@@ -90,7 +90,7 @@ T ArrayStack<T>::peek() const
 	return this->stackPtr[top];
 }
 
-template <class T>
+template <typename T>
 void ArrayStack<T>::clear()
 {
 	if (isEmpty())
@@ -100,19 +100,19 @@ void ArrayStack<T>::clear()
 	this->currentSize = 0;
 }
 
-template <class T>
+template <typename T>
 bool ArrayStack<T>::isEmpty() const
 {
 	return (top == -1);
 }
 
-template <class T>
+template <typename T>
 bool ArrayStack<T>::isFull() const
 {
 	return (top == this->capacity - 1);
 }
 
-template <class T>
+template <typename T>
 ArrayStack<T> ArrayStack<T>::from(T *arr, int size)
 {
 	if (size <= 0 || !arr)
@@ -127,7 +127,7 @@ ArrayStack<T> ArrayStack<T>::from(T *arr, int size)
 	return tempStack;
 }
 
-template <class T>
+template <typename T>
 ArrayStack<T>::~ArrayStack()
 {
 	if (this->stackPtr)

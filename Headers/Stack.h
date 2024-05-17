@@ -11,7 +11,7 @@
 #ifndef H_Stack
 #define H_Stack
 
-template <class T>
+template <typename T>
 class Stack
 {
 public:

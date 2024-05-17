@@ -12,7 +12,7 @@
 
 #include "../../Headers/ArrayStack.h"
 
-template <class T>
+template <typename T>
 void towerOfHanoi(int, ArrayStack<T> &, ArrayStack<T> &, ArrayStack<T> &);
 
 #include "TowerOfHanoiImpl.cpp"

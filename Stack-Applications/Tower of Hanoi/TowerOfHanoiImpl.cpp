@@ -9,7 +9,7 @@
 
 #include "TowerOfHanoi.h"
 
-template <class T>
+template <typename T>
 void towerOfHanoi(int numberOfDisks, ArrayStack<T> &source, ArrayStack<T> &auxiliary, ArrayStack<T> &destination)
 {
     if (numberOfDisks == 1)

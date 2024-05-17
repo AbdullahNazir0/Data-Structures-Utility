@@ -10,13 +10,13 @@
 #include "../Headers/SinglyLinkedList.h"
 #include <iostream>
 
-template <class T>
+template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList()
 {
     this->tail = nullptr;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::display() const
 {
     if (!this->head)
@@ -35,7 +35,7 @@ void SinglyLinkedList<T>::display() const
     std::cout << temp->data << "\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::displayFormatted() const
 {
     if (!this->head)
@@ -54,7 +54,7 @@ void SinglyLinkedList<T>::displayFormatted() const
     std::cout << temp->data << " ]\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::displayAtIndex(int index)
 {
     if (index < 0 || index >= this->nodesCount)
@@ -77,7 +77,7 @@ void SinglyLinkedList<T>::displayAtIndex(int index)
     }
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtStart(Node<T> *node)
 {
     if (!node)
@@ -99,14 +99,14 @@ void SinglyLinkedList<T>::insertAtStart(Node<T> *node)
     this->nodesCount++;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtStart(const T &value)
 {
     Node<T> *temp = new Node<T>(value);
     insertAtStart(temp);
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtEnd(Node<T> *node)
 {
     if (!node)
@@ -127,14 +127,14 @@ void SinglyLinkedList<T>::insertAtEnd(Node<T> *node)
     this->nodesCount++;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtEnd(const T &value)
 {
     Node<T> *temp = new Node<T>(value);
     insertAtEnd(temp);
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtIndex(Node<T> *value, int index)
 {
     if (index < 0 || index > this->nodesCount)
@@ -159,7 +159,7 @@ void SinglyLinkedList<T>::insertAtIndex(Node<T> *value, int index)
     }
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAtIndex(const T &value, int index)
 {
 
@@ -167,7 +167,7 @@ void SinglyLinkedList<T>::insertAtIndex(const T &value, int index)
     insertAtIndex(valueNode, index);
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertBeforeNode(
     Node<T> *value,
     Node<T> *nodeToCheck)
@@ -206,7 +206,7 @@ void SinglyLinkedList<T>::insertBeforeNode(
     std::cout << "Node not found in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertBeforeNode(
     const T &value,
     Node<T> *nodeToCheck)
@@ -215,7 +215,7 @@ void SinglyLinkedList<T>::insertBeforeNode(
     insertBeforeNode(valueNode, nodeToCheck);
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAfterNode(
     Node<T> *value,
     Node<T> *nodeToCheck)
@@ -245,7 +245,7 @@ void SinglyLinkedList<T>::insertAfterNode(
     std::cout << "Node not found in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertAfterNode(
     const T &value,
     Node<T> *nodeToCheck)
@@ -254,7 +254,7 @@ void SinglyLinkedList<T>::insertAfterNode(
     insertAfterNode(valueNode, nodeToCheck);
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
 {
     // Assuming that the valuesList is also a linked list.
@@ -284,7 +284,7 @@ void SinglyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
     }
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::insertMultiple(T *values, int count)
 {
     if (!values || count <= 0)
@@ -313,7 +313,7 @@ void SinglyLinkedList<T>::insertMultiple(T *values, int count)
     this->tail = temp;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteFirst()
 {
     if (!this->head)
@@ -330,7 +330,7 @@ void SinglyLinkedList<T>::deleteFirst()
     this->nodesCount--;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteLast()
 {
     if (!this->head)
@@ -359,7 +359,7 @@ void SinglyLinkedList<T>::deleteLast()
     this->tail = temp;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteFromIndex(int index)
 {
     if (!this->head)
@@ -399,7 +399,7 @@ void SinglyLinkedList<T>::deleteFromIndex(int index)
     this->nodesCount--;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteByValue(const T &value)
 {
     if (!this->head)
@@ -429,7 +429,7 @@ void SinglyLinkedList<T>::deleteByValue(const T &value)
     std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
-// template <class T>
+// template <typename T>
 // void SinglyLinkedList<T>::deleteAllByValue(const T &value)
 // {
 //     if (!this->head)
@@ -475,7 +475,7 @@ void SinglyLinkedList<T>::deleteByValue(const T &value)
 //         std::cout << "Cannot find " << value << " in Linked List.\n";
 // }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteAllByValue(const T &value)
 {
     if (!this->head)
@@ -509,7 +509,7 @@ void SinglyLinkedList<T>::deleteAllByValue(const T &value)
         std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
 {
     if (!this->head || !this->head->next)
@@ -548,7 +548,7 @@ void SinglyLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
     std::cout << "Node not found.\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
 {
     if (!this->head)
@@ -581,7 +581,7 @@ void SinglyLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
     std::cout << "Node not found.\n";
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::clear()
 {
     if (!this->head)
@@ -596,7 +596,7 @@ void SinglyLinkedList<T>::clear()
     }
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteList()
 {
     if (!this->head)
@@ -617,7 +617,7 @@ void SinglyLinkedList<T>::deleteList()
     this->nodesCount = 0;
 }
 
-template <class T>
+template <typename T>
 void SinglyLinkedList<T>::deleteRange(int startIndex, int endIndex)
 {
     if (!this->head)
@@ -657,7 +657,7 @@ void SinglyLinkedList<T>::deleteRange(int startIndex, int endIndex)
         this->tail = prev;
 }
 
-template <class T>
+template <typename T>
 SinglyLinkedList<T>::~SinglyLinkedList()
 {
     Node<T> *current = this->head;

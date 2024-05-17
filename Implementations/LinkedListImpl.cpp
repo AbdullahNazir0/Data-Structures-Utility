@@ -9,14 +9,14 @@
 
 #include "../Headers/LinkedList.h"
 
-template <class T>
+template <typename T>
 LinkedList<T>::LinkedList()
 {
     this->head = nullptr;
     this->nodesCount = 0;
 }
 
-template <class T>
+template <typename T>
 LinkedList<T>::~LinkedList()
 {
     if (this->head)
