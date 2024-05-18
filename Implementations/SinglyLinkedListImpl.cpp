@@ -25,7 +25,6 @@ void SinglyLinkedList<T>::display() const
         return;
     }
 
-    std::cout << "Linked List Data: ";
     Node<T> *temp = this->head;
     while (temp->next != nullptr)
     {
@@ -72,6 +71,32 @@ void SinglyLinkedList<T>::displayAtIndex(int index)
             std::cout << temp->data << '\n';
             return;
         }
+        temp = temp->next;
+        count++;
+    }
+}
+
+template <typename T>
+T SinglyLinkedList<T>::valueAtIndex(int index) const
+{
+    if (!this->head)
+    {
+        std::cout << "Can't return value, linked list is empty.\n";
+        return T();
+    }
+
+    if (index < 0 || index >= this->nodesCount)
+    {
+        std::cout << "Invalid index.\n";
+        return T();
+    }
+
+    int count = 0;
+    Node<T> *temp = this->head;
+    while (temp != nullptr)
+    {
+        if (count == index)
+            return (temp->data);
         temp = temp->next;
         count++;
     }
@@ -179,7 +204,8 @@ void SinglyLinkedList<T>::insertBeforeNode(
     }
     if (!nodeToCheck)
     {
-        std::cout << "Cannot add before an empty node.\n" return;
+        std::cout << "Cannot add before an empty node.\n";
+        return;
     }
 
     Node<T> *temp = this->head;
@@ -601,10 +627,7 @@ template <typename T>
 void SinglyLinkedList<T>::deleteList()
 {
     if (!this->head)
-    {
-        std::cout << "Cannot delete empty Linked List.\n";
         return;
-    }
 
     Node<T> *temp = this->head;
     while (temp)

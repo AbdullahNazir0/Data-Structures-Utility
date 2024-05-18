@@ -26,19 +26,6 @@ public:
 	//  be 100, if no capacity is provided
 	//  explicitly.
 
-	// ArrayStack(const ArrayStack &other);
-	// // Copy constructor with ArrayStack object as
-	// //  argument.
-	// // It will deep copy all the contents of the
-	// //  object.
-
-	// ArrayStack(ArrayStack &&other) noexcept;
-	// // Move constructor with ArrayStack object as
-	// //  argument.
-	// // It will move all the contents of object
-	// //  passed to this object, and set the
-	// //  passed object to empty stack.
-
 	void display() const override;
 	// Overriden function display to display
 	//  all  values of the stack.
@@ -67,22 +54,23 @@ public:
 	//  stack is empty or not.
 	// True if empty, false otherwise.
 
-	bool isFull() const override;
-	// Overriden function isFull to check if the
+	bool isFull() const;
+	// Function isFull to check if the
 	//  stack is full or not.
 	// True is empty, false otherwise.
 
-	static ArrayStack<T> from(T *, int);
-	// Function to return an ArrayStack from the
-	//  given array.
+	static ArrayStack<T> *from(T *, int);
+	// Function to return an ArrayStack object address
+	//  from the given array.
 	// This function takes an array as parameter
-	//  and return a stack with this array.
+	//  and return a pointer to stack with this array.
 
 	~ArrayStack();
 	// Destructor function to delete dynamic memory.
 
 private:
-	int top;
+	T *stackPtr;
+	int capacity;
 };
 
 #include "../Implementations/ArrayStackImpl.cpp"

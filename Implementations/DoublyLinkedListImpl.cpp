@@ -40,7 +40,6 @@ void DoublyLinkedList<T>::display() const
         return;
     }
 
-    std::cout << "Linked List Data: ";
     Node<T> *temp = this->head;
     while (temp->next != nullptr)
     {

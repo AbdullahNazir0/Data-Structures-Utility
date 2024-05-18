@@ -36,6 +36,13 @@ public:
     // Overrides the displayFormatted method of the base
     //  class.
 
+    T valueAtIndex(int) const;
+    // Function to get value at a specific index in
+    //  the singly linked list.
+    // This function checks if index is valid,
+    //  and if valid, returns value at that index.
+    //  otherwise return default value with error message.
+
     void displayAtIndex(int) override;
     // Function to display the element at a specific
     //  index in the singly linked list.

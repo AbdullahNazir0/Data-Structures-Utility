@@ -10,15 +10,16 @@
 #include "../Headers/Stack.h"
 
 template <typename T>
-Stack<T>::Stack(int cap) : capacity(cap)
+Stack<T>::Stack()
 {
+	top = -1;
 	currentSize = 0;
 }
 
 template <typename T>
-int Stack<T>::getCapacity() const
+int Stack<T>::getTop() const
 {
-	return capacity;
+	return top;
 }
 
 template <typename T>

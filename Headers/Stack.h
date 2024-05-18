@@ -15,10 +15,11 @@ template <typename T>
 class Stack
 {
 public:
-	Stack(int);
-	// Parameterized consturctor.
-	// The function takes capacity as argument
-	//  and sets the capacity of stack.
+	Stack();
+	// Default parameter for abstract class
+	//  Stack.
+	// This constructor initializes top to -1
+	//  and currentSize to 0.
 
 	virtual void display() const = 0;
 	// Pure virutal function to display all
@@ -50,13 +51,15 @@ public:
 	//  if the stack is empty and
 	//  false otherwise.
 
-	virtual bool isFull() const = 0;
+	// will not be abstract funcion as linkedlist
+	// stack dont have capacity.
+	// virtual bool isFull() const = 0;
 	// Pure virtual function to return true
 	//  if the stack is full and
 	//  false otherwise.
 
-	int getCapacity() const;
-	// Function to return capacity of the
+	int getTop() const;
+	// Function to return top(index) of the
 	//  stack.
 
 	int getCurrentSize() const;
@@ -67,8 +70,7 @@ public:
 	// Destructor function.
 
 protected:
-	T *stackPtr;
-	int capacity;
+	int top;
 	int currentSize;
 };
 
