@@ -587,6 +587,7 @@ void SinglyLinkedList<T>::clear()
     if (!this->head)
     {
         std::cout << "Cannot clear empty Linked List.\n";
+        return;
     }
     Node<T> *temp = this->head;
     while (temp)
