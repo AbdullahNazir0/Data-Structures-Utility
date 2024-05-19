@@ -7,15 +7,17 @@
 //  in the class ArrayQueue .
 // ********************************************************
 
-#include "ArrayQueue.h"
+#include "../Headers/ArrayQueue.h"
+#include <iostream>
 
 template <typename T>
-ArrayQueue<T>::ArrayQueue(int cap = 100) : Queue<T>(cap)
+ArrayQueue<T>::ArrayQueue(int cap)
+    : capacity(cap),
+      front(-1),
+      rear(-1),
+      currentSize(0)
 {
-    front = -1;
-    end = -1;
-    currentSize = 0;
-    stackPtr = new T[capacity];
+    queuePtr = new T[capacity];
 }
 
 template <typename T>
@@ -26,9 +28,19 @@ void ArrayQueue<T>::display() const
         std::cout << "Queue is empty.\n";
         return;
     }
-    std::cout << "Queue data: ";
-    for (int i = 0; i < currentSize; i++)
-        std::cout << stackPtr[i] << " ";
+
+    if (front <= rear)
+    {
+        for (int i = front; i <= rear; i++)
+            std::cout << queuePtr[i] << " ";
+    }
+    else
+    {
+        for (int i = front; i < capacity; ++i)
+            std::cout << queuePtr[i] << " ";
+        for (int i = 0; i <= rear; ++i)
+            std::cout << queuePtr[i] << " ";
+    }
     std::cout << "\n";
 }
 
@@ -36,59 +48,61 @@ template <typename T>
 void ArrayQueue<T>::enqueue(T value)
 {
     if (isFull())
+    {
+        std::cout << "Can't enqueue, queue is full. (Queue overflown)\n";
         return;
+    }
 
-    queuePtr[++rear] = value;
+    rear = (rear + 1) % capacity;
+    queuePtr[rear] = value;
     currentSize++;
-    if (front == -1)
-        front++;
+    if (currentSize == 1)
+        front = rear;
 }
 
 template <typename T>
 T ArrayQueue<T>::dequeue()
 {
-    if (isEmpty)
+    if (isEmpty())
+    {
+        std::cout << "Can't dequeue, queue is empty. (Queue underflown)\n";
         return T();
+    }
 
+    T temp = queuePtr[front];
     if (front == rear) // If array is empty but not at -1;
     {
-        T temp = queuePtr[front];
         front = -1;
         rear = -1;
-        return temp;
     }
     else
     {
-
-        T temp = queuePtr[front--];
-        currentSize--;
-        return temp;
+        front = (front + 1) % capacity;
     }
+    currentSize--;
+    return temp;
 }
 
 template <typename T>
-T ArrayQueue<T>::peek() const
+T ArrayQueue<T>::getFront() const
 {
     if (isEmpty())
+    {
+        std::cout << "Can't get front, queue is empty.\n";
         return T();
+    }
 
     return queuePtr[front];
 }
 
 template <typename T>
-T ArrayQueue<T>::peekAt(int position) const
+T ArrayQueue<T>::getRear() const
 {
-    if (isEmpty() || position > currentSize || position < 0)
+    if (isEmpty())
+    {
+        std::cout << "Can't get rear, queue is empty.\n";
         return T();
-
-    return queuePtr[position];
-}
-
-template <typename T>
-T ArrayQueue<T>::atLast() const
-{
-    if (isEmpty)
-        return T();
+    }
 
     return queuePtr[rear];
 }
@@ -96,9 +110,6 @@ T ArrayQueue<T>::atLast() const
 template <typename T>
 void ArrayQueue<T>::clear()
 {
-    if (isEmpty())
-        return;
-
     front = -1;
     rear = -1;
     currentSize = 0;
@@ -107,7 +118,7 @@ void ArrayQueue<T>::clear()
 template <typename T>
 bool ArrayQueue<T>::isEmpty() const
 {
-    return (currentSize == 0);
+    return (front == -1);
 }
 
 template <typename T>

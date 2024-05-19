@@ -11,12 +11,15 @@
 #ifndef H_ArrayQueue
 #define H_ArrayQueue
 
+#define DEFAULT_MAX_SIZE 100
+
 #include "Queue.h"
 
 template <typename T>
 class ArrayQueue : public Queue<T>
 {
-    ArrayQueue(int = 100);
+public:
+    ArrayQueue(int = DEFAULT_MAX_SIZE);
     // Parameterized constructor with default
     //  argument capacity.
     // The default capacity of the queue will
@@ -35,17 +38,13 @@ class ArrayQueue : public Queue<T>
     // Overriden function dequeue to delete and return
     //  first value from the queue.
 
-    T peek() const override;
-    // Overriden function peek to return first value
-    //  of the queue pointed by the front.
+    T getFront() const override;
+    // Overridden function front to get first value of
+    //  the queue.
 
-    T peekAt(int) const;
-    // Function to return value at a specific index
-    //  of the queue, given by the user.
-
-    T atLast() const;
-    // Function to return last value of the queue
-    //  pointed by the rear.
+    T getRear() const override;
+    // Overridden function rear to get last value of the
+    //  queue.
 
     void clear();
     // Function to reset the queue.
@@ -64,8 +63,11 @@ class ArrayQueue : public Queue<T>
     // Destructor function to delete dynamic memory.
 
 private:
+    T *queuePtr;
     int front;
     int rear;
+    int capacity;
+    int currentSize;
 };
 
 #include "../Implementations/ArrayQueueImpl.cpp"

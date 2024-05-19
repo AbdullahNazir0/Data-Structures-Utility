@@ -24,7 +24,7 @@ void ArrayStack<T>::display() const
 		std::cout << "Stack is empty.\n";
 		return;
 	}
-	std::cout << "Stack data: ";
+	
 	for (int i = 0; i <= this->top; i++)
 		std::cout << stackPtr[i] << " ";
 	std::cout << "\n";

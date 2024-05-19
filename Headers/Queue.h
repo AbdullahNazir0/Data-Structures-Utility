@@ -15,10 +15,8 @@ template <typename T>
 class Queue
 {
 public:
-    Queue(int);
-    // Parameterized consturctor.
-    // The function takes capacity as argument
-    //  and sets the capacity of queue.
+    Queue() {}
+    // Default constructor.
 
     virtual void display() const = 0;
     // Pure virutal function to display all
@@ -39,9 +37,15 @@ public:
     // It will be implemented in the concrete
     //  class.
 
-    virtual T peek() const = 0;
+    virtual T getFront() const = 0;
     // Pure virtual function to return first
     //  value that is pointed by the front.
+    // It will be implemented in the concrete
+    //  class.
+
+    virtual T getRear() const = 0;
+    // Pure virtual function to return last
+    //  value that is pointed by the rear.
     // It will be implemented in the concrete
     //  class.
 
@@ -55,23 +59,8 @@ public:
     //  if the queue is full and
     //  false otherwise.
 
-    int getCapacity() const;
-    // Function to return capacity of the
-    //  queue.
-
-    int getCurrentSize() const;
-    // Function to return current size of
-    //  the queue.
-
-    ~Queue();
+    ~Queue() {}
     // Destructor function.
-
-private:
-    T *queuePtr;
-    int capacity;
-    int currentSize;
 };
-
-#include "../Implementations/QueueImpl.cpp"
 
 #endif

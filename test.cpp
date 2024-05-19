@@ -1,30 +1,41 @@
 #include <iostream>
-#include "./Headers/LinkedListStack.h"
-#include "./Headers/ArrayStack.h"
+#include "./Headers/ArrayQueue.h"
 
 using namespace std;
 
 int main()
 {
 
-    LinkedListStack<int> stack;
+    ArrayQueue<int> queue;
 
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
-    stack.push(5);
+    std::cout << "Test 1 passed..\n";
 
-    stack.display();
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
+    queue.enqueue(5);
 
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.pop();
+    queue.display();
 
-    stack.display();
+    cout << queue.getFront() << '\n';
+
+    cout << queue.getRear() << '\n';
+
+    queue.dequeue();
+    queue.dequeue();
+    queue.dequeue();
+    queue.dequeue();
+    queue.dequeue();
+    queue.dequeue();
+
+    queue.display();
+
+    queue.clear();
+
+    queue.display();
+
+    queue.clear();
 
     return 0;
 }
