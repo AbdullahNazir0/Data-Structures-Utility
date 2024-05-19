@@ -17,6 +17,34 @@ SinglyLinkedList<T>::SinglyLinkedList()
 }
 
 template <typename T>
+int SinglyLinkedList<T>::getNodesCount()
+{
+    return (this->nodesCount);
+}
+
+template <typename T>
+T SinglyLinkedList<T>::getHeadData()
+{
+    if (!this->head)
+    {
+        return T(-1);
+    }
+
+    return (this->head->data);
+}
+
+template <typename T>
+T SinglyLinkedList<T>::getTailData()
+{
+    if (!this->head)
+    {
+        return T(-1);
+    }
+
+    return (tail->data);
+}
+
+template <typename T>
 void SinglyLinkedList<T>::display() const
 {
     if (!this->head)

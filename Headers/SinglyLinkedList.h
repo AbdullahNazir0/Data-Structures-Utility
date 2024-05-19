@@ -25,6 +25,19 @@ public:
     //  nullptr when LinkedList constructor will
     //  be called.
 
+    int getNodesCount();
+    // Getter function that returns total nodes count.
+
+    T getHeadData();
+    // Getter function to get data of head.
+    // The function returns default value of T,
+    //  if the list is empty.
+
+    T getTailData();
+    // Getter function to get data of tail.
+    // The function returns default value of T,
+    //  if the list is empty.
+
     void display() const override;
     // Function to display all contents of the singly
     //  linked list.
