@@ -54,11 +54,6 @@ public:
     //  if the queue is empty and
     //  false otherwise.
 
-    virtual bool isFull() const = 0;
-    // Pure virtual function to return true
-    //  if the queue is full and
-    //  false otherwise.
-
     ~Queue() {}
     // Destructor function.
 };

@@ -54,7 +54,7 @@ public:
     //  queue is empty or not.
     // True if empty, false otherwise.
 
-    bool isFull() const override;
+    bool isFull() const;
     // Overriden function isFull to check if the
     //  queue is full or not.
     // True is empty, false otherwise.
