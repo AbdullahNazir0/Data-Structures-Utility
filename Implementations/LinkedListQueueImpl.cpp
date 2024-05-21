@@ -1,3 +1,12 @@
+// ********************************************************
+// Name: Abdullah Nazir
+// Date: May 18, 2024
+//
+// Implementation file LinkedListQueueImpl.cpp
+// This file contains definitions of the functions declared
+//  in the class LinkedListQueue .
+// ********************************************************
+
 #include "../Headers/LinkedListQueue.h"
 
 template <typename T>

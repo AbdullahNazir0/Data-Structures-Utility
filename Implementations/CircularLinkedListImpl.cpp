@@ -9,6 +9,7 @@
 
 #include "../Headers/CircularLinkedList.h"
 #include <iostream>
+#include <vector>
 
 template <typename T>
 CircularLinkedList<T>::CircularLinkedList()
@@ -26,7 +27,6 @@ void CircularLinkedList<T>::display() const
         return;
     }
 
-    std::cout << "Linked List Data: ";
     Node<T> *temp = this->head;
     while (temp->next != this->head)
     {
@@ -208,7 +208,7 @@ void CircularLinkedList<T>::insertBeforeNode(
     }
 
     Node<T> *temp = this->head->next;
-    Node<T> *prev = this->head;
+    Node<T> *prev = nullptr;
     while (temp != this->head)
     {
         if (temp == nodeToCheck)
@@ -270,7 +270,7 @@ void CircularLinkedList<T>::insertAfterNode(
 }
 
 template <typename T>
-void CircularLinkedList<T>::insertMultiple(T *dataArray, int count)
+void CircularLinkedList<T>::insertMultiple(T *dataArray, int count) // Need to get array reference to calculate its size.
 {
     if (!dataArray || count <= 0)
     {
@@ -278,29 +278,122 @@ void CircularLinkedList<T>::insertMultiple(T *dataArray, int count)
         return;
     }
 
-    int size = sizeof(dataArray) / sizeof(dataArray[0]);
-    if (size != count)
+    // Function caller will be responsible for the validation.
+    // if (dataArray.size() != count)
+    // {
+    //     std::cout << "Array items and count not match. (not inserted)\n";
+    //     return;
+    // }
+
+    Node<T> *listToAdd = nullptr;
+    Node<T> *temp = nullptr;
+    for (int i = 0; i < count; i++)
     {
-        std::cout << "Array items and count not match. (not inserted)\n";
-        return;
+        Node<T> *newNode = new Node<T>(dataArray[i]);
+        if (!listToAdd)
+        {
+            listToAdd = newNode;
+            temp = newNode;
+        }
+        else
+        {
+            temp->next = newNode;
+            temp = temp->next;
+        }
     }
 
-    // continue from here. ->
+    insertMultiple(listToAdd, count);
 }
 
 template <typename T>
-void CircularLinkedList<T>::insertMultiple(Node<T> *, int)
+void CircularLinkedList<T>::insertMultiple(Node<T> *dataNodes, int count)
 {
+    // Assuming that dataNodes is also a linked list.
+    if (!dataNodes)
+    {
+        std::cout << "Cannot add empty linked list.\n";
+        return;
+    }
+
+    if (!this->head)
+    {
+        this->head = dataNodes;
+        Node<T> *temp = this->head;
+        while (temp->next != nullptr)
+            temp = temp->next;
+        temp->next = this->head;
+        this->nodesCount = count;
+        return;
+    }
+
+    Node<T> *temp = dataNodes;
+    while (temp->next != nullptr)
+        temp = temp->next;
+    temp->next = this->head;
+    Node<T> *tempMain = this->head;
+    while (tempMain->next != this->head)
+        tempMain = tempMain->next;
+    tempMain->next = dataNodes;
+    this->head = dataNodes;
+    this->nodesCount += count;
+    dataNodes = nullptr; // Taking ownership from dataNodes for the integrity of list.
 }
 
 template <typename T>
 void CircularLinkedList<T>::deleteFirst()
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+    if (this->head->next == this->head)
+    {
+        delete this->head;
+        this->head = nullptr;
+        this->nodesCount--; // 0
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    while (temp->next != this->head)
+        temp = temp->next;
+    temp->next = this->head->next;
+    Node<T> *nodeToDelete = this->head;
+    this->head = this->head->next;
+    delete nodeToDelete;
+    this->nodesCount--;
 }
 
 template <typename T>
 void CircularLinkedList<T>::deleteLast()
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+
+    if (this->head->next == this->head)
+    {
+        delete this->head;
+        this->head = nullptr;
+        this->nodesCount--; // 0
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    Node<T> *prev = nullptr;
+    while (temp->next != this->head)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = this->head;
+    if (prev == this->head)
+        this->head->next = this->head;
+    delete temp;
+    this->nodesCount--;
 }
 
 template <typename T>
@@ -309,13 +402,79 @@ void CircularLinkedList<T>::deleteFromIndex(int)
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteByValue(const T &)
+void CircularLinkedList<T>::deleteByValue(const T &value)
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    Node<T> *prev = nullptr;
+    do
+    {
+        if (temp->data == value)
+        {
+            if (temp == this->head)
+            {
+                deleteFirst();
+                return;
+            }
+            else
+            {
+                prev->next = temp->next;
+                delete temp;
+                this->nodesCount--;
+                return;
+            }
+        }
+        prev = temp;
+        temp = temp->next;
+    } while (temp != this->head);
+
+    std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteAllByValue(const T &)
+void CircularLinkedList<T>::deleteAllByValue(const T &value)
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    Node<T> *prev = nullptr;
+    bool flag = false;
+    do
+    {
+        if (temp->data == value)
+        {
+            if (temp == this->head)
+            {
+                deleteFirst();
+                flag = true;
+            }
+            else
+            {
+                prev->next = temp->next;
+                delete temp;
+                this->nodesCount--;
+                flag = true;
+                temp = prev->next;
+            }
+        }
+        else
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+    } while (temp != this->head);
+
+    if (flag == false)
+        std::cout << "Cannot find " << value << " in Linked List.\n";
 }
 
 template <typename T>
@@ -324,30 +483,42 @@ void CircularLinkedList<T>::deleteBeforeNode(Node<T> *)
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteAfterNode(Node<T> *)
+void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+
+    std::cout << " Node not found.\n ";
 }
 
 template <typename T>
 void CircularLinkedList<T>::clear()
 {
+    if (!this->head)
+    {
+        std::cout << "Cannot clear empty linked list.\n";
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    do
+    {
+        temp->data = T();
+        temp = temp->next;
+    } while (temp != this->head);
 }
 
 template <typename T>
 void CircularLinkedList<T>::deleteList()
 {
-}
-
-template <typename T>
-void CircularLinkedList<T>::deleteRange(int, int)
-{
-}
-
-template <typename T>
-CircularLinkedList<T>::~CircularLinkedList()
-{
     if (!this->head)
+    {
+        std::cout << "Cannot delete empty linked list.\n";
         return;
+    }
 
     Node<T> *temp = this->head;
     do
@@ -358,4 +529,74 @@ CircularLinkedList<T>::~CircularLinkedList()
     } while (temp != this->head);
     this->head = nullptr;
     this->nodesCount = 0;
+}
+
+template <typename T>
+void CircularLinkedList<T>::deleteRange(int start, int end)
+{
+    if (!this->head)
+    {
+        std::cout << "Cannot delete range from empty linked list.\n";
+        return;
+    }
+
+    if (start < 0 || end > this->nodesCount || start >= end)
+    {
+        std::cout << "Invalid range.\n";
+        return;
+    }
+
+    if (start == 0)
+    {
+        int count = 0;
+        while (count < end)
+        {
+            deleteFirst();
+            count++;
+        }
+        if (this->nodesCount == 0)
+            this->head = nullptr;
+        return;
+    }
+
+    Node<T> *temp = this->head;
+    int count = 0;
+    do
+    {
+        if (count == start - 1)
+            break;
+        temp = temp->next;
+        count++;
+    } while (temp != this->head);
+    for (int i = start; i < end; i++)
+    {
+        Node<T> *nodeToDelete = temp->next;
+        temp->next = temp->next->next;
+        delete nodeToDelete;
+        this->nodesCount--;
+    }
+
+    if (this->nodesCount == 0)
+    {
+        this->head = nullptr;
+    }
+}
+
+template <typename T>
+CircularLinkedList<T>::~CircularLinkedList()
+{
+    // if (!this->head)
+    //     return;
+
+    // Node<T> *temp = this->head;
+    // do
+    // {
+    //     Node<T> *nodeToDelete = temp;
+    //     temp = temp->next;
+    //     delete nodeToDelete;
+    // } while (temp != this->head);
+    // this->head = nullptr;
+    // this->nodesCount = 0;
+
+    deleteList();
 }

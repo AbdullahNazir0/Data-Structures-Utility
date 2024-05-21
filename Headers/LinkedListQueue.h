@@ -1,3 +1,14 @@
+// ********************************************************
+// Name: Abdullah Nazir
+// Date: May 18, 2024
+//
+// class LinkedListQueue
+// This file contains implementation of data structure
+// queue implemented with linked list by inheriting from
+// abstract class Queue with extended features and
+// functionalitites.
+// ********************************************************
+
 #ifndef H_LinkedListQueue
 #define H_LinkedListQueue
 
@@ -10,6 +21,7 @@ class LinkedListQueue : public Queue<T>
 public:
     LinkedListQueue();
     // Default constructor.
+
     void display() const override;
     // Overriden function display to display
     //  all  values of the queue.
