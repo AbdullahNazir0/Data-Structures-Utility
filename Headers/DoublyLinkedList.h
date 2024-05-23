@@ -18,13 +18,9 @@ template <typename T>
 class DoublyLinkedList : LinkedList<T>
 {
 public:
-    Node<T> *findNode(const T &value);
     DoublyLinkedList();
     // Default constructor for DoublyLinkedList.
-    // Initializes the tail pointer to nullptr
-    //  and head will also be initialized to
-    //  nullptr when LinkedList constructor will
-    //  be called.
+    // Initializes the head tail pointer to nullptr.
 
     void display() const override;
     // Function to display all contents of the doubly
@@ -180,13 +176,20 @@ public:
     //  range of indices from the doubly linked list.
     // Overrides the deleteRange method of the base class.
 
+    Node<T> *findNode(const T &value);
+    // Function to find node with a given value.
+    // The function will return the node pointer
+    //  that has given value. And will return nullptr, if
+    //  no such node is found
+
     ~DoublyLinkedList();
     // Destructor function for doublyLinkedList.
     // Performs necessary cleanup, such as deleting all
     //  nodes and deallocating memory.
 
 private:
-    Node<T> *tail;
+    DoublyNode<T> *head;
+    DoublyNode<T> *tail;
 };
 
 #include "../Implementations/DoublyLinkedListImpl.cpp"

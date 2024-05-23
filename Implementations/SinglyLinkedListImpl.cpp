@@ -139,7 +139,7 @@ void SinglyLinkedList<T>::insertAtStart(Node<T> *node)
         std::cout << "Cannot insert an empty node.\n";
         return;
     }
-    SinglyNode<T> *singlyNode = static_cast<singlyNode *>(node);
+    SinglyNode<T> *singlyNode = static_cast<SinglyNode<T> *>(node);
     if (!head)
     {
         head = singlyNode;
@@ -157,7 +157,7 @@ void SinglyLinkedList<T>::insertAtStart(Node<T> *node)
 template <typename T>
 void SinglyLinkedList<T>::insertAtStart(const T &value)
 {
-    Node<T> *temp = new Node<T>(value);
+    Node<T> *temp = new SinglyNode<T>(value);
     insertAtStart(temp);
 }
 
@@ -169,15 +169,17 @@ void SinglyLinkedList<T>::insertAtEnd(Node<T> *node)
         std::cout << "Cannot insert an empty node.\n";
         return;
     }
+
+    SinglyNode<T> *singlyNode = static_cast<SinglyNode<T> *>(node);
     if (!head)
     {
-        head = node;
-        tail = node;
+        head = singlyNode;
+        tail = singlyNode;
     }
     else
     {
-        tail->next = node;
-        tail = node;
+        tail->next = singlyNode;
+        tail = singlyNode;
     }
     this->nodesCount++;
 }
@@ -185,7 +187,7 @@ void SinglyLinkedList<T>::insertAtEnd(Node<T> *node)
 template <typename T>
 void SinglyLinkedList<T>::insertAtEnd(const T &value)
 {
-    Node<T> *temp = new Node<T>(value);
+    Node<T> *temp = new SinglyNode<T>(value);
     insertAtEnd(temp);
 }
 
@@ -203,13 +205,14 @@ void SinglyLinkedList<T>::insertAtIndex(Node<T> *value, int index)
         insertAtEnd(value);
     else
     {
-        Node<T> *temp = head;
+        SinglyNode<T> *temp = head;
         for (int count = 0; count < index - 1; count++)
         {
             temp = temp->next;
         }
-        value->next = temp->next;
-        temp->next = value;
+        SinglyNode<T> *singlyNode = static_cast<SinglyNode<T> *>(value);
+        singlyNode->next = temp->next;
+        temp->next = singlyNode;
         this->nodesCount++;
     }
 }
@@ -218,7 +221,7 @@ template <typename T>
 void SinglyLinkedList<T>::insertAtIndex(const T &value, int index)
 {
 
-    Node<T> *valueNode = new Node<T>(value);
+    Node<T> *valueNode = new SinglyNode<T>(value);
     insertAtIndex(valueNode, index);
 }
 
@@ -238,19 +241,20 @@ void SinglyLinkedList<T>::insertBeforeNode(
         return;
     }
 
-    Node<T> *temp = head;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = head;
+    SinglyNode<T> *prev = nullptr;
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
     while (temp != nullptr)
     {
-        if (temp == nodeToCheck)
+        if (temp == singlyNodeToCheck)
         {
-            if (prev == nullptr) // If nodeToCheck is the head
+            if (prev == nullptr) // If singlyNodeToCheck is the head
                 insertAtStart(value);
             else
             {
-                Node<T> *newValue = new Node<T>(*value);
-                prev->next = newValue;
-                newValue->next = temp;
+                SinglyNode<T> *singlyValue = static_cast<SinglyNode<T> *>(value);
+                prev->next = singlyValue;
+                singlyValue->next = temp;
                 this->nodesCount++;
                 return;
             }
@@ -267,7 +271,7 @@ void SinglyLinkedList<T>::insertBeforeNode(
     const T &value,
     Node<T> *nodeToCheck)
 {
-    Node<T> *valueNode = new Node<T>(value);
+    Node<T> *valueNode = new SinglyNode<T>(value);
     insertBeforeNode(valueNode, nodeToCheck);
 }
 
@@ -281,17 +285,18 @@ void SinglyLinkedList<T>::insertAfterNode(
         std::cout << "Linked List is empty. (Not added)\n";
         return;
     }
-
-    Node<T> *temp = head;
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
+    SinglyNode<T> *singlyValue = static_cast<SinglyNode<T> *>(value);
+    SinglyNode<T> *temp = head;
     while (temp != nullptr)
     {
-        if (temp == nodeToCheck)
+        if (temp == singlyNodeToCheck)
         {
             if (tail == temp)
-                tail = value;
+                tail = singlyValue;
             else
-                value->next = temp->next;
-            temp->next = value;
+                singlyValue->next = temp->next;
+            temp->next = singlyValue;
             this->nodesCount++;
             return;
         }
@@ -306,7 +311,7 @@ void SinglyLinkedList<T>::insertAfterNode(
     const T &value,
     Node<T> *nodeToCheck)
 {
-    Node<T> *valueNode = new Node<T>(value);
+    Node<T> *valueNode = new SinglyNode<T>(value);
     insertAfterNode(valueNode, nodeToCheck);
 }
 
@@ -322,18 +327,18 @@ void SinglyLinkedList<T>::insertMultiple(Node<T> *valuesList, int count)
 
     if (!head)
     {
-        head = valuesList;
+        head = static_cast<SinglyNode<T> *>(valuesList);
         this->nodesCount = count;
     }
     else
     {
-        Node<T> *temp = valuesList;
+        SinglyNode<T> *temp = static_cast<SinglyNode<T> *>(valuesList);
         while (temp->next != nullptr)
         {
             temp = temp->next;
         }
         temp->next = head;
-        head = valuesList;
+        head = static_cast<SinglyNode<T> *>(valuesList);
         this->nodesCount += count;
 
         valuesList = nullptr; // releasing ownership.
@@ -349,7 +354,7 @@ void SinglyLinkedList<T>::insertMultiple(T *values, int count)
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
 
     while (temp && temp->next)
     {
@@ -358,7 +363,7 @@ void SinglyLinkedList<T>::insertMultiple(T *values, int count)
 
     for (int i = 0; i < count; i++)
     {
-        Node<T> *valueNode = new Node<T>(values[i]);
+        SinglyNode<T> *valueNode = new SinglyNode<T>(values[i]);
         if (!temp)
             head = valueNode;
         else
@@ -378,7 +383,7 @@ void SinglyLinkedList<T>::deleteFirst()
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     head = head->next;
     if (!head)
         tail = nullptr;
@@ -404,7 +409,7 @@ void SinglyLinkedList<T>::deleteLast()
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     while (temp->next->next != nullptr)
     {
         temp = temp->next;
@@ -442,12 +447,12 @@ void SinglyLinkedList<T>::deleteFromIndex(int index)
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     for (int i = 0; i < index - 1; i++)
     {
         temp = temp->next;
     }
-    Node<T> *toDelete = temp->next;
+    SinglyNode<T> *toDelete = temp->next;
     temp->next = temp->next->next;
     if (!temp->next)
         tail = temp;
@@ -464,12 +469,12 @@ void SinglyLinkedList<T>::deleteByValue(const T &value)
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     while (temp->next)
     {
         if (temp->next->data == value)
         {
-            Node<T> *toDelete = temp->next;
+            SinglyNode<T> *toDelete = temp->next;
             temp->next = temp->next->next;
             if (head == toDelete)
                 head = head->next;
@@ -541,12 +546,12 @@ void SinglyLinkedList<T>::deleteAllByValue(const T &value)
     }
 
     bool flag = false;
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     while (temp && temp->next)
     {
         if (temp->next->data == value)
         {
-            Node<T> *toDelete = temp->next;
+            SinglyNode<T> *toDelete = temp->next;
             temp->next = temp->next->next;
             if (head == toDelete)
                 head = head->next;
@@ -586,14 +591,15 @@ void SinglyLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
     while (temp->next->next != nullptr)
     {
-        if (temp->next->next == nodeToCheck)
+        if (temp->next->next == singlyNodeToCheck)
         {
             // logic to delete.
-            Node<T> *nodeToDelete = temp->next;
-            temp->next = nodeToCheck;
+            SinglyNode<T> *nodeToDelete = temp->next;
+            temp->next = singlyNodeToCheck;
             delete nodeToDelete;
             this->nodesCount--;
             return;
@@ -613,17 +619,18 @@ void SinglyLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
         return;
     }
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
     while (temp != nullptr)
     {
-        if (temp == nodeToCheck)
+        if (temp == singlyNodeToCheck)
         {
             if (temp->next == nullptr)
             {
                 std::cout << "No node to delete after given node.\n";
                 return;
             }
-            Node<T> *nodeToDelete = temp->next;
+            SinglyNode<T> *nodeToDelete = temp->next;
             temp->next = temp->next->next;
             delete nodeToDelete;
             if (temp->next == nullptr)
@@ -645,7 +652,7 @@ void SinglyLinkedList<T>::clear()
         std::cout << "Cannot clear empty Linked List.\n";
         return;
     }
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     while (temp)
     {
         temp->data = T();
@@ -659,10 +666,10 @@ void SinglyLinkedList<T>::deleteList()
     if (!head)
         return;
 
-    Node<T> *temp = head;
+    SinglyNode<T> *temp = head;
     while (temp)
     {
-        Node<T> *nodeToDelete = temp;
+        SinglyNode<T> *nodeToDelete = temp;
         temp = temp->next;
         delete nodeToDelete;
     }
@@ -688,8 +695,8 @@ void SinglyLinkedList<T>::deleteRange(int startIndex, int endIndex)
         return;
     }
 
-    Node<T> *temp = head;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = head;
+    SinglyNode<T> *prev = nullptr;
     for (int i = 0; i < startIndex; i++)
     {
         prev = temp;
@@ -697,7 +704,7 @@ void SinglyLinkedList<T>::deleteRange(int startIndex, int endIndex)
     }
     for (int i = startIndex; i < endIndex; i++)
     {
-        Node<T> *nextNode = temp->next;
+        SinglyNode<T> *nextNode = temp->next;
         delete temp;
         this->nodesCount--;
         if (prev)
@@ -714,14 +721,16 @@ void SinglyLinkedList<T>::deleteRange(int startIndex, int endIndex)
 template <typename T>
 SinglyLinkedList<T>::~SinglyLinkedList()
 {
-    Node<T> *current = head;
-    while (current)
-    {
-        Node<T> *next = current->next;
-        delete current;
-        current = next;
-    }
-    head = nullptr;
-    tail = nullptr;
-    this->nodesCount = 0;
+    // SinglyNode<T> *current = head;
+    // while (current)
+    // {
+    //     SinglyNode<T> *next = current->next;
+    //     delete current;
+    //     current = next;
+    // }
+    // head = nullptr;
+    // tail = nullptr;
+    // this->nodesCount = 0;
+
+    deleteList();
 }

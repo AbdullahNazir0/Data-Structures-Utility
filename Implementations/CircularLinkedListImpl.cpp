@@ -14,8 +14,8 @@
 template <typename T>
 CircularLinkedList<T>::CircularLinkedList()
 {
-    // Base class already initializes head to nullptr
-    //  and nodesCount to 0.
+    head = nullptr;
+    this->nodesCount = 0;
 }
 
 template <typename T>
@@ -27,7 +27,7 @@ void CircularLinkedList<T>::display() const
         return;
     }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     while (temp->next != this->head)
     {
         std::cout << temp->data << " -> ";
@@ -46,7 +46,7 @@ void CircularLinkedList<T>::displayFormatted() const
     }
 
     std::cout << "[ ";
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     while (temp->next != this->head)
     {
         std::cout << temp->data << " -> ";
@@ -70,7 +70,7 @@ void CircularLinkedList<T>::displayAtIndex(int index)
     }
 
     int count = 0;
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     do
     {
         if (count == index)
@@ -87,7 +87,7 @@ void CircularLinkedList<T>::displayAtIndex(int index)
 template <typename T>
 void CircularLinkedList<T>::insertAtStart(const T &data)
 {
-    Node<T> *newNode = new Node<T>(data);
+    Node<T> *newNode = new SinglyNode<T>(data);
 
     insertAtStart(newNode);
 }
@@ -95,21 +95,22 @@ void CircularLinkedList<T>::insertAtStart(const T &data)
 template <typename T>
 void CircularLinkedList<T>::insertAtStart(Node<T> *dataNode)
 {
+    SinglyNode<T> *singlyDataNode = static_cast<SinglyNode<T> *>(dataNode);
     if (!this->head)
     {
-        this->head = dataNode;
+        this->head = singlyDataNode;
         this->head->next = this->head;
     }
     else
     {
-        dataNode->next = this->head;
-        Node<T> *temp = this->head;
+        singlyDataNode->next = this->head;
+        SinglyNode<T> *temp = this->head;
         while (temp->next != this->head)
         {
             temp = temp->next;
         }
-        temp->next = dataNode;
-        this->head = dataNode;
+        temp->next = singlyDataNode;
+        this->head = singlyDataNode;
     }
     this->nodesCount++;
 }
@@ -117,7 +118,7 @@ void CircularLinkedList<T>::insertAtStart(Node<T> *dataNode)
 template <typename T>
 void CircularLinkedList<T>::insertAtEnd(const T &data)
 {
-    Node<T> *newNode = new Node<T>(data);
+    Node<T> *newNode = new SinglyNode<T>(data);
 
     insertAtEnd(newNode);
 }
@@ -125,18 +126,20 @@ void CircularLinkedList<T>::insertAtEnd(const T &data)
 template <typename T>
 void CircularLinkedList<T>::insertAtEnd(Node<T> *dataNode)
 {
+    SinglyNode<T> *singlyDataNode = static_cast<SinglyNode<T> *>(dataNode);
+
     if (!this->head)
     {
-        this->head = dataNode;
+        this->head = singlyDataNode;
         this->head->next = this->head;
     }
     else
     {
-        Node<T> *temp = this->head;
+        SinglyNode<T> *temp = this->head;
         while (temp->next != this->head)
             temp = temp->next;
-        temp->next = dataNode;
-        dataNode->next = this->head;
+        temp->next = singlyDataNode;
+        singlyDataNode->next = this->head;
     }
     this->nodesCount++;
 }
@@ -146,7 +149,7 @@ void CircularLinkedList<T>::insertAtIndex(
     const T &data,
     int index)
 {
-    Node<T> *newNode = new Node<T>(data);
+    Node<T> *newNode = new SinglyNode<T>(data);
 
     insertAtIndex(newNode, index);
 }
@@ -165,13 +168,14 @@ void CircularLinkedList<T>::insertAtIndex(
         insertAtStart(dataNode);
 
     int count = 0;
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
+    SinglyNode<T> *singlyDataNode = static_cast<SinglyNode<T> *>(dataNode);
     do
     {
         if (count == index - 1)
         {
-            dataNode->next = temp->next;
-            temp->next = dataNode;
+            singlyDataNode->next = temp->next;
+            temp->next = singlyDataNode;
             this->nodesCount++;
             return;
         }
@@ -185,7 +189,7 @@ void CircularLinkedList<T>::insertBeforeNode(
     const T &data,
     Node<T> *nodeToCheck)
 {
-    Node<T> *newNode = new Node<T>(data);
+    Node<T> *newNode = new SinglyNode<T>(data);
 
     insertBeforeNode(newNode, nodeToCheck);
 }
@@ -201,20 +205,22 @@ void CircularLinkedList<T>::insertBeforeNode(
         return;
     }
 
-    if (nodeToCheck == this->head)
+    SinglyNode<T> *sinlgyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
+    if (sinlgyNodeToCheck == this->head)
     {
         insertAtStart(dataNode);
         return;
     }
 
-    Node<T> *temp = this->head->next;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = this->head->next;
+    SinglyNode<T> *prev = nullptr;
     while (temp != this->head)
     {
-        if (temp == nodeToCheck)
+        if (temp == sinlgyNodeToCheck)
         {
-            prev->next = dataNode;
-            dataNode->next = temp;
+            SinglyNode<T> *singlyDataNode = static_cast<SinglyNode<T> *>(dataNode);
+            prev->next = singlyDataNode;
+            singlyDataNode->next = temp;
             this->nodesCount++;
             return;
         }
@@ -230,7 +236,7 @@ void CircularLinkedList<T>::insertAfterNode(
     const T &data,
     Node<T> *nodeToCheck)
 {
-    Node<T> *newNode = new Node<T>(data);
+    Node<T> *newNode = new SinglyNode<T>(data);
 
     insertAfterNode(newNode, nodeToCheck);
 }
@@ -253,13 +259,15 @@ void CircularLinkedList<T>::insertAfterNode(
     //     return;
     // }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
+    SinglyNode<T> *temp = this->head;
     do
     {
-        if (temp == nodeToCheck)
+        if (temp == singlyNodeToCheck)
         {
-            dataNode->next = temp->next;
-            temp->next = dataNode;
+            SinglyNode<T> *singlyDataNode = static_cast<SinglyNode<T> *>(dataNode);
+            singlyDataNode->next = temp->next;
+            temp->next = singlyDataNode;
             this->nodesCount++;
             return;
         }
@@ -285,11 +293,11 @@ void CircularLinkedList<T>::insertMultiple(T *dataArray, int count) // Need to g
     //     return;
     // }
 
-    Node<T> *listToAdd = nullptr;
-    Node<T> *temp = nullptr;
+    SinglyNode<T> *listToAdd = nullptr;
+    SinglyNode<T> *temp = nullptr;
     for (int i = 0; i < count; i++)
     {
-        Node<T> *newNode = new Node<T>(dataArray[i]);
+        SinglyNode<T> *newNode = new SinglyNode<T>(dataArray[i]);
         if (!listToAdd)
         {
             listToAdd = newNode;
@@ -317,8 +325,8 @@ void CircularLinkedList<T>::insertMultiple(Node<T> *dataNodes, int count)
 
     if (!this->head)
     {
-        this->head = dataNodes;
-        Node<T> *temp = this->head;
+        this->head = static_cast<SinglyNode<T> *>(dataNodes);
+        SinglyNode<T> *temp = this->head;
         while (temp->next != nullptr)
             temp = temp->next;
         temp->next = this->head;
@@ -326,15 +334,15 @@ void CircularLinkedList<T>::insertMultiple(Node<T> *dataNodes, int count)
         return;
     }
 
-    Node<T> *temp = dataNodes;
+    SinglyNode<T> *temp = static_cast<SinglyNode<T> *>(dataNodes);
     while (temp->next != nullptr)
         temp = temp->next;
     temp->next = this->head;
-    Node<T> *tempMain = this->head;
+    SinglyNode<T> *tempMain = this->head;
     while (tempMain->next != this->head)
         tempMain = tempMain->next;
-    tempMain->next = dataNodes;
-    this->head = dataNodes;
+    tempMain->next = static_cast<SinglyNode<T> *>(dataNodes);
+    this->head = static_cast<SinglyNode<T> *>(dataNodes);
     this->nodesCount += count;
     dataNodes = nullptr; // Taking ownership from dataNodes for the integrity of list.
 }
@@ -355,11 +363,12 @@ void CircularLinkedList<T>::deleteFirst()
         return;
     }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     while (temp->next != this->head)
         temp = temp->next;
+
     temp->next = this->head->next;
-    Node<T> *nodeToDelete = this->head;
+    SinglyNode<T> *nodeToDelete = this->head;
     this->head = this->head->next;
     delete nodeToDelete;
     this->nodesCount--;
@@ -382,8 +391,8 @@ void CircularLinkedList<T>::deleteLast()
         return;
     }
 
-    Node<T> *temp = this->head;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = this->head;
+    SinglyNode<T> *prev = nullptr;
     while (temp->next != this->head)
     {
         prev = temp;
@@ -392,12 +401,13 @@ void CircularLinkedList<T>::deleteLast()
     prev->next = this->head;
     if (prev == this->head)
         this->head->next = this->head;
+
     delete temp;
     this->nodesCount--;
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteFromIndex(int)
+void CircularLinkedList<T>::deleteFromIndex(int) // *** //
 {
 }
 
@@ -410,8 +420,8 @@ void CircularLinkedList<T>::deleteByValue(const T &value)
         return;
     }
 
-    Node<T> *temp = this->head;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = this->head;
+    SinglyNode<T> *prev = nullptr;
     do
     {
         if (temp->data == value)
@@ -445,8 +455,8 @@ void CircularLinkedList<T>::deleteAllByValue(const T &value)
         return;
     }
 
-    Node<T> *temp = this->head;
-    Node<T> *prev = nullptr;
+    SinglyNode<T> *temp = this->head;
+    SinglyNode<T> *prev = nullptr;
     bool flag = false;
     do
     {
@@ -478,12 +488,12 @@ void CircularLinkedList<T>::deleteAllByValue(const T &value)
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteBeforeNode(Node<T> *)
+void CircularLinkedList<T>::deleteBeforeNode(Node<T> *) // *** //
 {
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
+void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck) // *** //
 {
     if (!this->head)
     {
@@ -491,7 +501,7 @@ void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
         return;
     }
 
-    std::cout << " Node not found.\n ";
+    std::cout << " SinglyNode not found.\n ";
 }
 
 template <typename T>
@@ -503,7 +513,7 @@ void CircularLinkedList<T>::clear()
         return;
     }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     do
     {
         temp->data = T();
@@ -515,15 +525,12 @@ template <typename T>
 void CircularLinkedList<T>::deleteList()
 {
     if (!this->head)
-    {
-        std::cout << "Cannot delete empty linked list.\n";
         return;
-    }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     do
     {
-        Node<T> *nodeToDelete = temp;
+        SinglyNode<T> *nodeToDelete = temp;
         temp = temp->next;
         delete nodeToDelete;
     } while (temp != this->head);
@@ -559,7 +566,7 @@ void CircularLinkedList<T>::deleteRange(int start, int end)
         return;
     }
 
-    Node<T> *temp = this->head;
+    SinglyNode<T> *temp = this->head;
     int count = 0;
     do
     {
@@ -570,7 +577,7 @@ void CircularLinkedList<T>::deleteRange(int start, int end)
     } while (temp != this->head);
     for (int i = start; i < end; i++)
     {
-        Node<T> *nodeToDelete = temp->next;
+        SinglyNode<T> *nodeToDelete = temp->next;
         temp->next = temp->next->next;
         delete nodeToDelete;
         this->nodesCount--;
@@ -588,10 +595,10 @@ CircularLinkedList<T>::~CircularLinkedList()
     // if (!this->head)
     //     return;
 
-    // Node<T> *temp = this->head;
+    // SinglyNode<T> *temp = this->head;
     // do
     // {
-    //     Node<T> *nodeToDelete = temp;
+    //     SinglyNode<T> *nodeToDelete = temp;
     //     temp = temp->next;
     //     delete nodeToDelete;
     // } while (temp != this->head);

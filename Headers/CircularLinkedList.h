@@ -12,6 +12,7 @@
 #define H_CircularLinkedList
 
 #include "LinkedList.h"
+#include "SinglyNode.h"
 
 template <typename T>
 class CircularLinkedList : public LinkedList<T>
@@ -170,6 +171,9 @@ public:
     // Destructor function for CircularLinkedList.
     // Performs necessary cleanup, such as deleting all
     //  nodes and deallocating memory.
+
+private: 
+    SinglyNode<T> *head;
 };
 
 #include "../Implementations/CircularLinkedListImpl.cpp"
