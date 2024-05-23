@@ -9,7 +9,6 @@
 
 #include "../Headers/CircularLinkedList.h"
 #include <iostream>
-#include <vector>
 
 template <typename T>
 CircularLinkedList<T>::CircularLinkedList()
@@ -407,8 +406,44 @@ void CircularLinkedList<T>::deleteLast()
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteFromIndex(int) // *** //
+void CircularLinkedList<T>::deleteFromIndex(int index)
 {
+    if (!head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+    if (index < 0 || index > this->nodesCount - 1)
+    {
+        std::cout << "Invalid index.\n";
+        return;
+    }
+
+    if (index == 0)
+    {
+        deleteFirst();
+        return;
+    }
+    if (index == this->nodesCount - 1)
+    {
+        deleteLast();
+        return;
+    }
+
+    int count = 0;
+    SinglyNode<T> *temp = head;
+    do
+    {
+        if (count == index - 1)
+        {
+            SinglyNode<T> *nodeToDelete = temp->next;
+            temp->next = temp->next->next;
+            delete nodeToDelete;
+            this->nodesCount--;
+            return;
+        }
+        temp = temp->next;
+    } while (temp != head);
 }
 
 template <typename T>
@@ -488,18 +523,91 @@ void CircularLinkedList<T>::deleteAllByValue(const T &value)
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteBeforeNode(Node<T> *) // *** //
+void CircularLinkedList<T>::deleteBeforeNode(Node<T> *nodeToCheck)
 {
+    if (!head)
+    {
+        std::cout << "Cannot delete from empty Linked List.\n";
+        return;
+    }
+    if (!nodeToCheck)
+    {
+        std::cout << "Node to check is empty.\n";
+        return;
+    }
+
+    if (head->next == head)
+    {
+        delete head;
+        head = nullptr;
+        this->nodesCount--;
+        return;
+    }
+
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
+    if (singlyNodeToCheck == head)
+    {
+        deleteLast();
+        return;
+    }
+    SinglyNode<T> *temp = head;
+    do
+    {
+        if (temp->next == singlyNodeToCheck)
+        {
+            SinglyNode<T> *nodeToDelete = temp;
+            temp = temp->next;
+            delete nodeToDelete;
+            this->nodesCount--;
+            return;
+        }
+        temp = temp->next;
+    } while (temp != head);
+
+    std::cout << " Node not found.\n ";
 }
 
 template <typename T>
-void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck) // *** //
+void CircularLinkedList<T>::deleteAfterNode(Node<T> *nodeToCheck)
 {
     if (!this->head)
     {
         std::cout << "Cannot delete from empty Linked List.\n";
         return;
     }
+    if (!nodeToCheck)
+    {
+        std::cout << "Node to check is empty.\n";
+        return;
+    }
+
+    SinglyNode<T> *singlyNodeToCheck = static_cast<SinglyNode<T> *>(nodeToCheck);
+    SinglyNode<T> *temp = head;
+    do
+    {
+        if (temp == singlyNodeToCheck)
+        {
+            if (temp->next == head)
+            {
+                deleteFirst();
+                return;
+            }
+            else if (temp->next->next == head)
+            {
+                deleteLast();
+                return;
+            }
+            else
+            {
+                SinglyNode<T> *nodeToDelete = temp->next;
+                temp->next = temp->next->next;
+                delete nodeToDelete;
+                this->nodesCount--;
+                return;
+            }
+        }
+        temp = temp->next;
+    } while (temp != head);
 
     std::cout << " SinglyNode not found.\n ";
 }
