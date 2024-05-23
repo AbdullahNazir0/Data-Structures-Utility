@@ -3,7 +3,7 @@
 // Date: April 20, 2024
 //
 // Abstract Class LinkedList
-// This class contains members and methodsto implement
+// This class contains members and methods to implement
 // data structure linked list abstract class. This class
 // will be extended to SinglyLinkedList, DoublyLinkedList
 // and CircularLinkedList.
@@ -150,7 +150,6 @@ public:
     // Destructor Function for LinkedList.
 
 protected:
-    Node<T> *head;
     int nodesCount;
 };
 

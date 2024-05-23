@@ -10,15 +10,7 @@
 #include "../Headers/LinkedList.h"
 
 template <typename T>
-LinkedList<T>::LinkedList()
-{
-    this->head = nullptr;
-    this->nodesCount = 0;
-}
+LinkedList<T>::LinkedList() : nodesCount(0) {}
 
 template <typename T>
-LinkedList<T>::~LinkedList()
-{
-    if (this->head)
-        delete this->head;
-}
+LinkedList<T>::~LinkedList() {}

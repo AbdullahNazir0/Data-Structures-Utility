@@ -11,7 +11,7 @@
 #ifndef H_SinglyLinkedList
 #define H_SinglyLinkedList
 
-// #include "Node.h"
+#include "SinglyNode.h"
 #include "LinkedList.h"
 
 template <typename T>
@@ -20,10 +20,8 @@ class SinglyLinkedList : public LinkedList<T>
 public:
     SinglyLinkedList();
     // Default constructor for SinglyLinkedList.
-    // Initializes the tail pointer to nullptr
-    //  and head will also be initialized to
-    //  nullptr when LinkedList constructor will
-    //  be called.
+    // Initializes the head and tail pointer to
+    //  nullptr.
 
     int getNodesCount();
     // Getter function that returns total nodes count.
@@ -197,7 +195,8 @@ public:
     //  nodes and deallocating memory.
 
 private:
-    Node<T> *tail;
+    SinglyNode<T> *head;
+    SinglyNode<T> *tail;
 };
 
 #include "../Implementations/SinglyLinkedListImpl.cpp"

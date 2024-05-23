@@ -2,31 +2,27 @@
 // Programmer: Abdullah Nazir
 // Date: April 20, 2024
 //
-// Struct Node
-// This struct contains a data to hold data and a
-// next pointer to store address of next node.
-// This node will be used to implement Linked Lists.
+// class Node
+// This class contains a data to hold data for
+// the node. This class is an abstract class.
+// This node concrete classes will be used to implement
+// Linked Lists.
 // ********************************************************
 
 #ifndef H_Node
 #define H_Node
 
 template <typename T>
-struct Node
+class Node
 {
-    T data;
-    Node *next;
-
+public:
     Node(const T &value)
     {
         data = value;
-        next = nullptr;
     }
-    virtual Node<T> *getPrev() const
-    {
-        return nullptr; // Default implementation for regular nodes
-    }
-    virtual void setPrev(Node<T> *value) {}
+    virtual ~Node() {}
+
+    T data;
 };
 
 #endif // H_Node
