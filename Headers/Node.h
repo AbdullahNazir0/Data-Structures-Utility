@@ -16,11 +16,17 @@ template <typename T>
 class Node
 {
 public:
+    Node() : data(T()) {}
+    // Default constructor.
+
     Node(const T &value)
     {
         data = value;
     }
+    // Parameterized constructor.
+
     virtual ~Node() {}
+    // Virtual destructor.
 
     T data;
 };

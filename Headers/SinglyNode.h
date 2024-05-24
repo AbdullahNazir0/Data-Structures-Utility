@@ -19,9 +19,17 @@ template <typename T>
 class SinglyNode : public Node<T>
 {
 public:
-    SinglyNode *next;
+    SinglyNode()
+        : Node<T>(T()),
+          next(nullptr) {}
+    // Default constructor.
 
-    SinglyNode(T data) : Node<T>(data), next(nullptr) {}
+    SinglyNode(const T &value)
+        : Node<T>(value),
+          next(nullptr) {}
+    // Parameterized constructor.
+
+    SinglyNode *next;
 };
 
 #endif

@@ -6,7 +6,7 @@
 // This class inherits from abstract class Node.
 // It has an additional next and prev pointer to store the
 // address of next and previous Nodes.
-// This class will be used to implement DoublyLinkedList 
+// This class will be used to implement DoublyLinkedList
 // class.
 // ********************************************************
 
@@ -19,13 +19,20 @@ template <typename T>
 class DoublyNode : public Node<T>
 {
 public:
-    DoublyNode *next;
-    DoublyNode *prev;
-
-    DoublyNode(T data)
-        : Node<T>(data),
+    DoublyNode()
+        : Node<T>(T()),
           next(nullptr),
           prev(nullptr) {}
+    // Default constructor.
+
+    DoublyNode(const T &value)
+        : Node<T>(value),
+          next(nullptr),
+          prev(nullptr) {}
+    // Parameterized constructor.
+
+    DoublyNode *next;
+    DoublyNode *prev;
 };
 
 #endif
