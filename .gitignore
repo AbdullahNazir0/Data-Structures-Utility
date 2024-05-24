@@ -33,7 +33,7 @@
 *.exe
 *.out
 *.app
-main
-test
+
+# Debug files
 test.cpp
 main.cpp
