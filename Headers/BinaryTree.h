@@ -1,0 +1,36 @@
+// ********************************************************
+// Programmer: Abdullah Nazir
+// Date: May 25, 2024
+//
+// Class BinaryTree
+// This class contains members and methods to implement
+// data structure binary tree. This class is inherited
+// from abstract class Tree .
+// ********************************************************
+
+#ifndef H_BinaryTree
+#define H_BinaryTree
+
+#include "Tree.h"
+
+template <typename T>
+class BinaryTree : public Tree<T>
+{
+public:
+    BinaryTree();
+    void insert(TreeNode<T> *) override;
+    void insert(const T &) override;
+    void remove(const T &) override;
+    void remove(TreeNode<T> *) override;
+    void displayInOrder() const override;
+    void displayPreOrder() const override;
+    void displayPostOrder() const override;
+    ~BinaryTree();
+
+private:
+    void subInsert(TreeNode<T> *&, TreeNode<T> *&);
+};
+
+#include "../Implementations/BinaryTreeImpl.cpp"
+
+#endif // H_BinaryTree
