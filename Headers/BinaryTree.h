@@ -28,7 +28,10 @@ public:
     ~BinaryTree();
 
 private:
-    void subInsert(TreeNode<T> *&, TreeNode<T> *&);
+    void subInsert(TreeNode<T> *, TreeNode<T> *);
+    void inOrder(TreeNode<T> *) const;
+    void preOrder(TreeNode<T> *) const;
+    void postOrder(TreeNode<T> *) const;
 };
 
 #include "../Implementations/BinaryTreeImpl.cpp"
