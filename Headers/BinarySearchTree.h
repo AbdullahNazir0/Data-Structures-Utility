@@ -16,23 +16,24 @@
 template <typename T>
 class BinarySearchTree : public Tree<T>
 {
-    public:
-        BinarySearchTree();
-        void insert(TreeNode<T> *) override;
-        void insert(const T &) override;
-        void remove(const T &) override;
-        void remove(TreeNode<T> *) override;
-        void displayInOrder() const override;
-        void displayPreOrder() const override;
-        void displayPostOrder() const override;
-        ~BinarySearchTree();
+public:
+    BinarySearchTree();
+    void insert(TreeNode<T> *) override;
+    void insert(const T &) override;
+    void remove(const T &) override;
+    void remove(TreeNode<T> *) override;
+    void displayInOrder() const override;
+    void displayPreOrder() const override;
+    void displayPostOrder() const override;
+    ~BinarySearchTree();
 
-    private:
-        void subInsert(TreeNode<T> *, TreeNode<T> *);
-        void subRemove(TreeNode<T> *, TreeNode<T> *);
-        void inOrder(TreeNode<T> *) const;
-        void preOrder(TreeNode<T> *) const;
-        void postOrder(TreeNode<T> *) const;
+private:
+    void subInsert(TreeNode<T> *&, TreeNode<T> *);
+    void subRemove(TreeNode<T> *&, TreeNode<T> *);
+    void inOrder(TreeNode<T> *) const;
+    void preOrder(TreeNode<T> *) const;
+    void postOrder(TreeNode<T> *) const;
+    void destroyTree(TreeNode<T> *);
 };
 
 #include "../Implementations/BinarySearchTreeImpl.cpp"
