@@ -25,13 +25,17 @@ public:
     void displayInOrder() const override;
     void displayPreOrder() const override;
     void displayPostOrder() const override;
+    int getTreeHeight() const;
     ~BinaryTree();
 
 private:
-    void subInsert(TreeNode<T> *, TreeNode<T> *);
+    void helpInsert(TreeNode<T> *&, TreeNode<T> *);
+    void helpRemove(TreeNode<T> *&, const T &);
     void inOrder(TreeNode<T> *) const;
     void preOrder(TreeNode<T> *) const;
     void postOrder(TreeNode<T> *) const;
+    int treeHeight(TreeNode<T> *) const;
+    void destroyTree(TreeNode<T> *&);
 };
 
 #include "../Implementations/BinaryTreeImpl.cpp"

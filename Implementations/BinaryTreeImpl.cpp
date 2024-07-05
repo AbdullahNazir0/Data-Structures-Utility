@@ -9,9 +9,13 @@
 
 #include "../Headers/BinaryTree.h"
 #include <iostream>
+#include "../Headers/ArrayQueue.h" // for level-order insertion.
 
 template <typename T>
-BinaryTree<T>::BinaryTree() {}
+BinaryTree<T>::BinaryTree()
+{
+    this->root = nullptr;
+}
 
 template <typename T>
 void BinaryTree<T>::insert(TreeNode<T> *valueNode)
@@ -28,7 +32,7 @@ void BinaryTree<T>::insert(TreeNode<T> *valueNode)
         return;
     }
 
-    subInsert(temp, valueNode);
+    helpInsert(this->root, valueNode);
 }
 
 template <typename T>
@@ -40,17 +44,41 @@ void BinaryTree<T>::insert(const T &value)
 }
 
 template <typename T>
-void BinaryTree<T>::remove(const T &) {}
+void BinaryTree<T>::remove(const T &value)
+{
+    if (!this->root)
+    {
+        std::cout << "Cannot delete, binary tree is empty.\n";
+        return;
+    }
+
+    helpRemove(this->root, value);
+}
 
 template <typename T>
-void BinaryTree<T>::remove(TreeNode<T> *) {}
+void BinaryTree<T>::remove(TreeNode<T> *valueNode)
+{
+    if (!valueNode)
+    {
+        std::cout << "Cannot delete empty node.\n";
+        return;
+    }
+
+    if (!this->root)
+    {
+        std::cout << "Cannot delete, binary tree is empty.\n";
+        return;
+    }
+
+    helpRemove(this->root, valueNode->data);
+}
 
 template <typename T>
 void BinaryTree<T>::displayInOrder() const
 {
     if (this->root == nullptr)
     {
-        std::cout << "Tree is empty.\n";
+        std::cout << "Binary Tree is empty.\n";
         return;
     }
 
@@ -63,7 +91,7 @@ void BinaryTree<T>::displayPreOrder() const
 {
     if (this->root == nullptr)
     {
-        std::cout << "Tree is empty.\n";
+        std::cout << "Binary Tree is empty.\n";
         return;
     }
 
@@ -76,7 +104,7 @@ void BinaryTree<T>::displayPostOrder() const
 {
     if (this->root == nullptr)
     {
-        std::cout << "Tree is empty.\n";
+        std::cout << "Binary Tree is empty.\n";
         return;
     }
 
@@ -85,34 +113,61 @@ void BinaryTree<T>::displayPostOrder() const
 }
 
 template <typename T>
+int BinaryTree<T>::getTreeHeight() const
+{
+    if (!this->root)
+        return (-1);
+
+    return (treeHeight(this->root));
+}
+
+template <typename T>
 BinaryTree<T>::~BinaryTree()
 {
-    if (this->root == nullptr)
-        return;
+    destroyTree(this->root);
 }
 
 // Private Functions.
 
 template <typename T>
-void BinaryTree<T>::subInsert(TreeNode<T> *node, TreeNode<T> *valueNode)
+void BinaryTree<T>::helpInsert(TreeNode<T> *&node, TreeNode<T> *valueNode)
 {
     if (!node)
     {
         node = valueNode;
         return;
     }
-    if (!node->left)
+
+    ArrayQueue<TreeNode<T> *> queue;
+    queue.enqueue(node);
+    while (!queue.isEmpty())
     {
-        node->left = valueNode;
-        return;
+        TreeNode<T> *temp = queue.getFront();
+        queue.dequeue();
+
+        if (temp->left != nullptr)
+            queue.enqueue(temp->left);
+        else
+        {
+            temp->left = valueNode;
+            return;
+        }
+
+        if (temp->right != nullptr)
+            queue.enqueue(temp->right);
+        else
+        {
+            temp->right = valueNode;
+            return;
+        }
     }
-    if (!node->right)
-    {
-        node->right = valueNode;
+}
+
+template <typename T>
+void BinaryTree<T>::helpRemove(TreeNode<T> *&node, const T &value)
+{
+    if (!node)
         return;
-    }
-    subInsert(node->left, valueNode);
-    subInsert(node->right, valueNode);
 }
 
 template <typename T>
@@ -146,4 +201,27 @@ void BinaryTree<T>::postOrder(TreeNode<T> *node) const
     postOrder(node->left);
     postOrder(node->right);
     std::cout << node->data << " ";
+}
+
+template <typename T>
+int BinaryTree<T>::treeHeight(TreeNode<T> *node) const
+{
+    if (!node)
+        return (-1);
+
+    int leftHeight = treeHeight(node->left);
+    int rightHeight = treeHeight(node->right);
+
+    return ((leftHeight > rightHeight ? leftHeight : rightHeight));
+}
+
+template <typename T>
+void BinaryTree<T>::destroyTree(TreeNode<T> *&node)
+{
+    if (!node)
+        return;
+    destroyTree(node->left);
+    destroyTree(node->right);
+    delete (node);
+    node = nullptr;
 }
