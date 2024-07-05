@@ -10,21 +10,8 @@
 #include "Queue.h"
 
 template <typename T>
-Queue<T>::Queue(int cap) : capacity(cap)
+Queue<T>::Queue()
 {
-    currentSize = 0;
-}
-
-template <typename T>
-int Queue<T>::getCapacity() const
-{
-    return capacity;
-}
-
-template <typename T>
-int Queue<T>::getCurrentSize() const
-{
-    return currentSize;
 }
 
 template <typename T>
