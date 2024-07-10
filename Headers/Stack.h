@@ -16,7 +16,7 @@ class Stack
 {
 public:
 	Stack();
-	// Default parameter for abstract class
+	// Default constructor for abstract class
 	//  Stack.
 	// This constructor initializes top to -1
 	//  and currentSize to 0.
