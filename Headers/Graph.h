@@ -17,7 +17,7 @@ class Graph
 public:
     Graph(bool = 0, bool = 0);
     // Paramtereized constructor with default
-    //  parameter.
+    //  parameters.
     // This constructor takes two boolean parameters
     //  isDirected and isWeighted as input, with
     // default values as false.
@@ -156,5 +156,7 @@ protected:
     int numberOfVertices;
     int numberOfEdges;
 };
+
+#include "../Implementations/GraphImpl.cpp"
 
 #endif
