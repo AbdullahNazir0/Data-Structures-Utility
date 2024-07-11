@@ -5,7 +5,7 @@
 // abstract class Graph
 // This file contains implementation of data structure
 // graph abstract class. This class will be extended to
-// AdjencyListGraph and AdjencyMatrixStack.
+// AdjacencyListGraph and AdjacencyMatrixStack.
 // ********************************************************
 
 #ifndef H_Graph
